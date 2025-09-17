@@ -30,9 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-q+)rh&425aq#(5#2l+7_(dpu&jwj6i&q2kfe_*!v!(o4t+#m3u')
 
 # DEBUG deve ser FALSO em produção.
-# Verificamos a variável 'RENDER' para determinar o ambiente.
-# ATENÇÃO: DEBUG=True TEMPORARIAMENTE para ver o traceback do Erro 500.
-DEBUG = True 
+DEBUG = False 
 
 # Domínios permitidos para acessar sua aplicação
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com'] 
