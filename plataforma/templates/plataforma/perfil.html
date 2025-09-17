@@ -5,119 +5,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Paleta de Cores Suaves e Modernas:
+         * Fundo: #0e122b (Azul Escuro Suave)
+         * Destaque/Primária: #4f46e5 (Índigo Vibrante/Roxo Suave)
+         * Secundária/Alerta: #f97316 (Laranja Suave)
+         * Sucesso: #10b981 (Verde Esmeralda Suave)
+         * Texto: #e5e7eb (Cinza Claro Suave)
+         */
         body {
-            font-family: Arial, sans-serif;
+            /* Fundo Lindo e Suave */
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #e5e7eb; /* Cor de letra suave */
+            font-family: 'Poppins', sans-serif; /* Letras lindas e elegantes */
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             align-items: center;
+            justify-content: flex-start;
             min-height: 100vh;
-            background-image: url("{% static 'plataforma/images/fundo_azul_raios.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #fff;
+            text-align: center;
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
         }
+
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
-            position: relative;
-            text-align: center;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism Suave */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; /* Fixo no topo */
+            top: 0;
+            z-index: 1000;
         }
+
+        .header h1 {
+            color: #4f46e5; /* Destaque Primário */
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1; /* Centraliza o título */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px); /* Ajuste para centralizar, compensando o botão */
+        }
+
+        .back-button {
+            /* Botão Voltar elegante */
+            color: #f97316; /* Cor chamativa para o botão */
+            font-size: 1.4em;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
+        }
+
+        /* Container principal do perfil */
         .profile-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             width: 90%;
             max-width: 500px;
-            margin-top: 20px;
-            margin-bottom: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
             text-align: left;
         }
+
         .profile-container h2 {
-            color: #ffd700;
+            width: 100%;
+            color: #e5e7eb;
+            font-weight: 700;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 25px;
             text-align: center;
         }
+
         .profile-info p {
             font-size: 1.1em;
             margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linha divisória suave */
             padding-bottom: 10px;
+            display: flex; /* Para alinhar o texto e o valor */
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .profile-info p strong {
+            color: #4f46e5; /* Cor de destaque para o rótulo */
+            margin-right: 10px;
+        }
+
         .edit-btn {
             width: 100%;
             padding: 15px;
             border: none;
-            border-radius: 25px;
-            background-image: linear-gradient(to right, #4CAF50, #2E8B57);
+            border-radius: 50px;
+            background-image: linear-gradient(to right, #10b981, #34d399); /* Gradiente verde */
             color: #fff;
             font-size: 1.1em;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
             margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
         }
         .edit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.6);
         }
+
+        /* Remover a navegação do rodapé */
         .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-        .footer-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            font-size: 0.8em;
-            transition: color 0.3s;
-        }
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px #fff);
-        }
-        .footer-item:hover {
-            color: #ffeb3b;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'menu' %}" class="back-button" title="Voltar ao Menu">
+            <i class="fas fa-arrow-left"></i> </a>
         <h1>Perfil</h1>
+        <div style="width: 20px;"></div>
     </div>
 
     <div class="profile-container">
         <h2>Informações do Usuário</h2>
         <div class="profile-info">
-            <p><strong>Nome de Usuário:</strong> {{ usuario.username }}</p>
-            <p><strong>Código de Convite:</strong> {{ usuario.invitation_code }}</p>
+            <p><strong>Nome de Usuário:</strong> <span>{{ usuario.username }}</span></p>
+            <p><strong>Código de Convite:</strong> <span>{{ usuario.invitation_code }}</span></p>
             
             {% if client_bank_details %}
-                <p><strong>Nome do Banco:</strong> {{ client_bank_details.nome_banco }}</p>
-                <p><strong>Nome do Titular:</strong> {{ client_bank_details.nome_titular_conta }}</p>
-                <p><strong>IBAN:</strong> {{ client_bank_details.iban }}</p>
+                <p><strong>Nome do Banco:</strong> <span>{{ client_bank_details.nome_banco }}</span></p>
+                <p><strong>Nome do Titular:</strong> <span>{{ client_bank_details.nome_titular_conta }}</span></p>
+                <p><strong>IBAN:</strong> <span>{{ client_bank_details.iban }}</span></p>
             {% else %}
-                <p><strong>Informações Bancárias:</strong> Não cadastradas</p>
+                <p><strong>Informações Bancárias:</strong> <span>Não cadastradas</span></p>
             {% endif %}
         </div>
 
@@ -126,27 +171,5 @@
         </a>
     </div>
 
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 </body>
 </html>
