@@ -5,15 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipa - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Paleta de Cores Suaves e Modernas:
+         * Fundo: #0e122b (Azul Escuro Suave)
+         * Destaque/Primária: #4f46e5 (Índigo Vibrante/Roxo Suave)
+         * Secundária/Alerta: #f97316 (Laranja Suave)
+         * Sucesso: #10b981 (Verde Esmeralda Suave)
+         * Texto: #e5e7eb (Cinza Claro Suave)
+         */
         body {
-            background-color: #0c0b2d;
-            background-image: url('{% static "plataforma/images/fundo_azul_raios.jpg" %}');
+            /* Fundo Lindo e Suave */
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e5e7eb; /* Cor de letra suave */
+            font-family: 'Poppins', sans-serif; /* Letras lindas e elegantes */
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,65 +32,113 @@
             justify-content: flex-start;
             min-height: 100vh;
             text-align: center;
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
         }
 
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
-            position: relative;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism Suave */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; /* Fixo no topo */
+            top: 0;
+            z-index: 1000;
         }
 
+        .header h1 {
+            color: #4f46e5; /* Destaque Primário */
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1; /* Centraliza o título */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px); /* Ajuste para centralizar */
+        }
+
+        .back-button {
+            /* Botão Voltar elegante */
+            color: #f97316; /* Cor chamativa para o botão */
+            font-size: 1.4em;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
+        }
+
+        /* Containers com estilo Glassmorphism */
         .team-container {
             width: 90%;
             max-width: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            margin-top: 20px;
-            margin-bottom: 100px; /* Espaço para o rodapé */
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .team-container h2 {
-            margin-bottom: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 10px #ffeb3b;
+            margin-bottom: 25px;
+            color: #e5e7eb;
+            font-weight: 700;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .invite-link-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            line-height: 1.6;
         }
 
         .invite-link-box p {
-            margin: 0;
             word-wrap: break-word;
-            font-size: 0.9em;
+            font-size: 1em;
+            font-weight: 600;
+            color: #10b981; /* Cor de destaque para o link */
+            margin: 0;
         }
 
         .copy-btn {
-            background-color: #ffeb3b;
-            color: #0c0b2d;
+            background-image: linear-gradient(to right, #4f46e5, #8b5cf6);
+            color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
         }
 
         .copy-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.6);
         }
 
+        /* Lista e itens da equipa */
         .team-list {
             list-style: none;
             padding: 0;
@@ -91,126 +149,113 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05); /* Fundo para cada item */
+            transition: background 0.3s;
+        }
+
+        .team-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .member-details {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
             text-align: left;
         }
 
-        .team-item:last-child {
-            border-bottom: none;
+        .member-details p {
+            margin: 0;
+            font-size: 1em;
+            font-weight: 400;
+            color: #9ca3af; /* Cor suave para o número */
         }
 
-        .team-details {
-            flex-grow: 1;
+        .member-details strong {
+            color: #e5e7eb;
+            font-weight: 600;
         }
 
-        .team-status {
-            font-weight: bold;
-            font-size: 0.9em;
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
-
-        .status-active {
-            background-color: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .status-inactive {
-            background-color: rgba(255, 65, 108, 0.2);
-            color: #ff416c;
-        }
-
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
+        /* Estilo para o Status Ilustrativo */
+        .status-container {
             display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-
-        .footer-item {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            text-decoration: none;
-            color: white;
-            font-size: 0.8em;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 0.9em;
         }
 
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px #fff);
+        .status-icon {
+            font-size: 1.4em;
+            margin-right: 8px;
         }
 
-        .footer-item:hover {
-            color: #ffeb3b;
+        .status-active .status-icon {
+            color: #10b981; /* Verde Sucesso */
+        }
+        .status-inactive .status-icon {
+            color: #ef4444; /* Vermelho Suave */
+        }
+        .status-active .status-text {
+            color: #10b981;
+        }
+        .status-inactive .status-text {
+            color: #ef4444;
+        }
+
+        /* Estilo para "Nenhum membro" */
+        .empty-message {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* Remover a navegação do rodapé */
+        .footer-nav {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'menu' %}" class="back-button" title="Voltar ao Menu">
+            <i class="fas fa-arrow-left"></i> </a>
         <h1>Equipa</h1>
+        <div style="width: 20px;"></div> 
     </div>
 
     <div class="team-container">
         <h2>Link de Convite</h2>
         <div class="invite-link-box">
             <p id="invite-link">{{ link_convite }}</p>
-            <button class="copy-btn" onclick="copyLink()">Copiar</button>
+            <button class="copy-btn" onclick="copyLink()">Copiar Link</button>
         </div>
 
         <h2>Membros da Equipa</h2>
         <ul class="team-list">
             {% for membro in equipa_membros %}
                 <li class="team-item">
-                    <div class="team-details">
-                        <p><strong>Nome:</strong> {{ membro.nome }}</p>
-                        <p><strong>Número:</strong> {{ membro.numero }}</p>
+                    <div class="member-details">
+                        <p><strong>Número:</strong> {{ forloop.counter }}</p>
                     </div>
-                    <span class="team-status {% if membro.tem_nivel_ativo %}status-active{% else %}status-inactive{% endif %}">
+                    <div class="status-container">
                         {% if membro.tem_nivel_ativo %}
-                            Nível Ativo
+                            <span class="status-icon status-active">
+                                <i class="fas fa-check"></i> </span>
+                            <span class="status-text status-active">ATIVO</span>
                         {% else %}
-                            Nível Inativo
+                            <span class="status-icon status-inactive">
+                                <i class="fas fa-times"></i> </span>
+                            <span class="status-text status-inactive">INATIVO</span>
                         {% endif %}
-                    </span>
+                    </div>
                 </li>
             {% empty %}
-                <p>Nenhum membro na sua equipa ainda.</p>
+                <p class="empty-message">Nenhum membro na sua equipa ainda.</p>
             {% endfor %}
         </ul>
     </div>
-
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 
     <script>
         function copyLink() {
