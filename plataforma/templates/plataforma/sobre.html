@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Fundo e Estilos Principais */
         body {
-            background-color: #0c0b2d;
-            background-image: url('{% static "plataforma/images/fundo_azul_raios.jpg" %}');
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e5e7eb;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,104 +25,159 @@
             justify-content: flex-start;
             min-height: 100vh;
             text-align: center;
+            padding-top: 60px;
         }
 
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
-            position: relative;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
         }
 
+        .header h1 {
+            color: #4f46e5;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px);
+        }
+
+        .back-button {
+            color: #f97316;
+            font-size: 1.4em;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
+        }
+
+        /* Container Principal do Conteúdo */
         .about-container {
             width: 90%;
             max-width: 700px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            padding: 25px;
-            margin-top: 20px;
-            margin-bottom: 100px; /* Espaço para o rodapé */
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
             text-align: left;
-            line-height: 1.6;
         }
 
         .about-container h2 {
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
+            color: #e5e7eb;
+            font-weight: 700;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
             text-align: center;
-            margin-bottom: 20px;
         }
 
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+        .about-container p {
+            line-height: 1.6;
+            color: #c9cdd2;
         }
 
-        .footer-item {
+        /* Seção de Links para os Grupos */
+        .social-links {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 350px;
+            padding: 15px;
+            border-radius: 50px;
             text-decoration: none;
-            color: white;
-            font-size: 0.8em;
-            transition: color 0.3s;
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px #fff);
+        .social-link-btn i {
+            font-size: 1.2em;
+            margin-right: 10px;
         }
 
-        .footer-item:hover {
-            color: #ffeb3b;
+        .whatsapp {
+            background-image: linear-gradient(to right, #25D366, #128C7E);
+        }
+        .whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .telegram {
+            background-image: linear-gradient(to right, #0088CC, #005f96);
+        }
+        .telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.5);
+        }
+
+        /* Remover a navegação do rodapé */
+        .footer-nav {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'menu' %}" class="back-button" title="Voltar ao Menu">
+            <i class="fas fa-arrow-left"></i>
+        </a>
         <h1>Sobre a Plataforma</h1>
+        <div style="width: 20px;"></div>
     </div>
 
     <div class="about-container">
+        {% if links_sociais %}
+        <div class="social-links">
+            {% if links_sociais.link_whatsapp %}
+            <a href="{{ links_sociais.link_whatsapp }}" class="social-link-btn whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                Grupo de WhatsApp
+            </a>
+            {% endif %}
+            {% if links_sociais.link_telegram %}
+            <a href="{{ links_sociais.link_telegram }}" class="social-link-btn telegram" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
+                Grupo de Telegram
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+
         <h2>Histórico da Plataforma</h2>
         <p>{{ sobre_texto|safe }}</p>
     </div>
 
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 </body>
 </html>
