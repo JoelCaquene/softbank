@@ -1,0 +1,602 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - softbank</title>
+    {# Seu link para o CSS externo. Adicione aqui os estilos gerais se preferir. #}
+    <link rel="stylesheet" href="{% static 'plataforma/css/menu.css' %}">
+    
+    <style>
+        /* IMPORTANTE: Estes estilos são para CORRIGIR e GARANTIR o layout e a aparência. */
+        /* Se o seu arquivo menu.css já tiver estas definições e você preferir usar o de lá, */
+        /* pode remover as seções correspondentes aqui, mas certifique-se que o resultado é o desejado. */
+
+        /* Importa a fonte Poppins para um visual moderno */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --cor-fundo: #0c0e18;
+            --cor-primaria: #ff3366; /* Rosa vibrante */
+            --cor-secundaria: #33ccff; /* Azul celeste */
+            --cor-texto: #ffffff;
+            --cor-texto-claro: #dddddd;
+            --cor-card-bg: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente para cards */
+            --borda-card: rgba(255, 255, 255, 0.2);
+            --sombra-card: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Alinhamento ao topo para melhor visualização do conteúdo */
+            min-height: 100vh;
+            text-align: center;
+            /* Corrigido: Usando a URL da imagem que você forneceu na última interação. */
+            /* Se ainda não for a imagem de fundo exata, por favor, substitua-a pela URL correta. */
+            background-image: url('{% static 'plataforma/images/background_placeholder.jpg' %}'); /* Adicione sua imagem de fundo na pasta static, ou substitua pela URL do Cloudinary */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden; /* Evita scroll horizontal */
+            position: relative;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: fixed; /* Fixa o header no topo */
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: var(--cor-primaria);
+            font-size: 1.8rem;
+            text-shadow: 0 0 8px rgba(255, 51, 102, 0.7);
+        }
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--cor-texto);
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .carousel-container {
+            width: 90%;
+            max-width: 800px; /* Largura máxima para o carrossel */
+            height: 180px; /* Altura fixa para o carrossel */
+            margin-top: 80px; /* Espaço abaixo do header fixo */
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            background-color: #333; /* Fundo para quando não há imagem */
+            position: relative;
+        }
+
+        #image-carousel {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out; /* Transição suave */
+        }
+        
+        .grid-container {
+            display: grid;
+            /* AJUSTE PARA 4 BOTÕES POR LINHA EM TELAS MAIORES */
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; /* Reduzi o gap para caber 4 itens */
+            padding: 0 10px; /* Padding ajustado */
+            width: 100%; 
+            max-width: 960px; /* Aumentei o max-width para acomodar 4 colunas */
+            margin-bottom: 20px;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, rgba(var(--bg-r, 30), var(--bg-g, 30), var(--bg-b, 50), 0.7), rgba(var(--bg-r-light, 60), var(--bg-g-light, 60), var(--bg-b-light, 90), 0.7));
+            border-radius: 10px; /* Borda um pouco menos arredondada para espaços menores */
+            padding: 5px; /* Reduzi o padding para os botões serem menores */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            min-height: 70px; /* Altura mínima reduzida para botões menores */
+            font-size: 0.7rem; /* Tamanho da fonte ajustado para caber mais texto */
+        }
+
+        .grid-item:hover {
+            transform: translateY(-3px) scale(1.02); /* Efeito de hover mais sutil */
+            box-shadow: 0 6px 15px rgba(var(--bg-r, 30), var(--bg-g, 30), var(--bg-b, 50), 0.7);
+            border-color: var(--cor-secundaria); /* Mudei para secundária para variar */
+        }
+
+        .grid-item img {
+            width: 35px; /* Tamanho do ícone ajustado para 4 por linha */
+            height: 35px;
+            margin-bottom: 3px; /* Margem ajustada */
+            border-radius: 5px; /* Suaviza as bordas dos ícones */
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cores individuais para os itens do grid (usando variáveis CSS) */
+        /* Mantendo as cores que você gostou */
+        .grid-item:nth-child(1) { --bg-r: 255; --bg-g: 51; --bg-b: 102; --bg-r-light: 255; --bg-g-light: 102; --bg-b-light: 153;} /* Deposito - Rosa */
+        .grid-item:nth-child(2) { --bg-r: 51; --bg-g: 204; --bg-b: 255; --bg-r-light: 102; --bg-g-light: 224; --bg-b-light: 255;} /* Saque - Azul */
+        .grid-item:nth-child(3) { --bg-r: 153; --bg-g: 51; --bg-b: 255; --bg-r-light: 183; --bg-g-light: 102; --bg-b-light: 255;} /* Tarefa - Roxo */
+        .grid-item:nth-child(4) { --bg-r: 255; --bg-g: 153; --bg-b: 51; --bg-r-light: 255; --bg-g-light: 173; --bg-b-light: 102;} /* Nivel - Laranja */
+        .grid-item:nth-child(5) { --bg-r: 51; --bg-g: 255; --bg-b: 153; --bg-r-light: 102; --bg-g-light: 255; --bg-b-light: 183;} /* Equipa - Verde Água */
+        .grid-item:nth-child(6) { --bg-r: 255; --bg-g: 204; --bg-b: 51; --bg-r-light: 255; --bg-g-light: 224; --bg-b-light: 102;} /* Sobre - Amarelo */
+        .grid-item:nth-child(7) { --bg-r: 255; --bg-g: 51; --bg-b: 204; --bg-r-light: 255; --bg-g-light: 102; --bg-b-light: 224;} /* Perfil - Pink */
+        .grid-item:nth-child(8) { --bg-r: 51; --bg-g: 102; --bg-b: 255; --bg-r-light: 102; --bg-g-light: 153; --bg-b-light: 255;} /* Prêmios de Subsídio - Azul Escuro */
+
+
+        .levels-container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 100px; /* Espaço para o footer */
+            text-align: left;
+        }
+
+        .levels-container h2 {
+            font-size: 1.5rem;
+            color: var(--cor-secundaria);
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px var(--cor-secundaria);
+            text-align: center;
+        }
+
+        .level-card {
+            background: var(--cor-card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex; /* Para alinhar imagem e texto */
+            align-items: center;
+            gap: 15px;
+            border: 1px solid var(--borda-card);
+            box-shadow: var(--sombra-card);
+        }
+
+        .level-card h3 {
+            color: var(--cor-primaria);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .level-card p {
+            font-size: 0.9rem;
+            color: var(--cor-texto-claro);
+            margin: 0;
+        }
+
+        .level-card-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-card-image-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background-color: #CCCCCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .buy-btn {
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-left: auto; /* Empurra o botão para a direita */
+        }
+
+        .buy-btn:hover {
+            background-color: #e6004c; /* Tonalidade mais escura da cor primária */
+        }
+
+        .no-levels-message {
+            color: var(--cor-texto-claro);
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* Estilo para os botões sociais */
+        .social-buttons-container {
+            position: fixed;
+            bottom: 120px; /* Posição vertical acima do rodapé */
+            right: 20px; /* Posição horizontal no canto direito */
+            z-index: 1000; /* Garante que os botões fiquem acima de outros elementos */
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espaço entre os ícones */
+        }
+        
+        .social-btn {
+            display: block;
+            width: 55px; /* Tamanho do ícone */
+            height: 55px;
+            border-radius: 50%;
+            background-color: #ffffff; /* Fundo branco para os ícones */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            overflow: hidden; /* Garante que a imagem se ajuste ao círculo */
+        }
+        
+        .social-btn:hover {
+            transform: scale(1.1); /* Efeito de zoom */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%; /* Faz a imagem ser circular */
+        }
+
+        /* Rodapé de Navegação */
+        .footer-nav {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--cor-texto);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: color 0.3s;
+        }
+
+        .footer-item img {
+            width: 24px; /* Tamanho dos ícones no rodapé */
+            height: 24px;
+            margin-bottom: 5px;
+        }
+
+        .footer-item:hover {
+            color: var(--cor-secundaria);
+        }
+
+        /* Media Queries para Responsividade */
+        /* Ajuste principal para 4 botões em linha nos telemóveis */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr); /* 4 itens por linha em telemóveis */
+                gap: 5px; /* Reduzi ainda mais o gap para caber */
+                padding: 0 5px; /* Padding ajustado */
+            }
+            .grid-item {
+                padding: 3px; /* Padding interno do botão reduzido */
+                min-height: 60px; /* Altura mínima ainda menor */
+                font-size: 0.65rem; /* Fonte menor */
+            }
+            .grid-item img {
+                width: 30px; /* Ícones ainda menores */
+                height: 30px;
+                margin-bottom: 2px;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .logout-btn {
+                padding: 5px 10px;
+                font-size: 0.7rem;
+            }
+            .carousel-container {
+                height: 120px; /* Carrossel menor */
+            }
+            .social-buttons-container {
+                bottom: 80px; /* Posição ajustada */
+                right: 5px;
+            }
+            .social-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 768px) { /* Para tablets em modo retrato */
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr); /* 4 itens por linha em tablets menores */
+                gap: 8px;
+                padding: 0 8px;
+            }
+            .grid-item {
+                padding: 8px;
+                min-height: 70px;
+                font-size: 0.75rem;
+            }
+            .grid-item img {
+                width: 35px;
+                height: 35px;
+                margin-bottom: 4px;
+            }
+        }
+
+        /* Para telas maiores (desktops) */
+        @media (min-width: 769px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr); /* 4 itens por linha em telas maiores */
+                gap: 15px; /* Um pouco mais de espaço */
+                padding: 0 20px;
+                max-width: 1000px; /* Largura máxima maior */
+            }
+            .grid-item {
+                padding: 10px;
+                min-height: 90px;
+                font-size: 0.9rem;
+            }
+            .grid-item img {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>softbank</h1>
+        <a href="{% url 'saida' %}" class="logout-btn">Sair</a>
+    </div>
+
+    <div class="carousel-container">
+        <div id="image-carousel"></div>
+    </div>
+
+    <div class="grid-container">
+        <a href="{% url 'deposito' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_deposito.png' %}" alt="Depósito">
+            <span>Depósito</span>
+        </a>
+        <a href="{% url 'saque' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_saque.png' %}" alt="Saque">
+            <span>Saque</span>
+        </a>
+        <a href="{% url 'tarefa' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_tarefa.png' %}" alt="Tarefa">
+            <span>Tarefa</span>
+        </a>
+        <a href="{% url 'nivel' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nível">
+            <span>Nível</span>
+        </a>
+        <a href="{% url 'equipa' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_equipa.png' %}" alt="Equipa">
+            <span>Equipa</span>
+        </a>
+        <a href="{% url 'sobre' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
+            <span>Sobre</span>
+        </a>
+        <a href="{% url 'perfil' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
+            <span>Perfil</span>
+        </a>
+        <a href="{% url 'premios_subsidios' %}" class="grid-item">
+            <img src="{% static 'plataforma/images/icon_premios.png' %}" alt="Prêmios de Subsídio">
+            <span>Prêmios de Subsídio</span>
+        </a>
+    </div>
+
+    <div class="levels-container">
+        <h2>Níveis em Aluguel</h2>
+        {% if niveis %}
+            {% for nivel in niveis %}
+                <div class="level-card">
+                    {% if nivel.imagem %}
+                        <img src="{{ nivel.imagem.url }}" alt="Imagem do Nível {{ nivel.nome_nivel }}" class="level-card-image">
+                    {% else %}
+                        <img src="https://placehold.co/100x100/CCCCCC/FFFFFF?text=Sem%20Imagem" alt="Nível sem imagem" class="level-card-image-placeholder">
+                    {% endif %}
+                    <div>
+                        <h3>{{ nivel.nome_nivel }}</h3> 
+                        <p>Aluguel: KZ {{ nivel.deposito_minimo|floatformat:2 }}</p>
+                        <p>Ganho Diário: KZ {{ nivel.ganho_diario|floatformat:2 }}</p>
+                        <p>Ciclo: {{ nivel.ciclo_dias }} dias</p>
+                    </div>
+                    <button class="buy-btn" data-nivel-id="{{ nivel.id }}">Alugar</button>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-levels-message">Nenhum nível disponível no momento.</p>
+        {% endif %}
+    </div>
+
+    <nav class="footer-nav">
+        <a href="{% url 'menu' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
+            <span>MENU</span>
+        </a>
+        <a href="{% url 'nivel' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
+            <span>NÍVEL</span>
+        </a>
+        <a href="{% url 'renda' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
+            <span>RENDA</span>
+        </a>
+        <a href="{% url 'sobre' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
+            <span>SOBRE</span>
+        </a>
+        <a href="{% url 'perfil' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
+            <span>PERFIL</span>
+        </a>
+    </nav>
+    
+    <div class="social-buttons-container">
+        {# CORRIGIDO: Agora usa o link do WhatsApp das configurações #}
+        {% if config and config.link_grupo_whatsapp %}
+        <a href="{{ config.link_grupo_whatsapp }}" target="_blank" class="social-btn whatsapp-btn">
+            <img src="{% static 'plataforma/images/icon_whatsapp.png' %}" alt="WhatsApp">
+        </a>
+        {% else %}
+        <a href="#" target="_blank" class="social-btn whatsapp-btn"> {# Fallback link #}
+            <img src="{% static 'plataforma/images/icon_whatsapp.png' %}" alt="WhatsApp">
+        </a>
+        {% endif %}
+
+        {# CORRIGIDO: Agora usa o link do Telegram das configurações #}
+        {% if config and config.link_grupo_telegram %}
+        <a href="{{ config.link_grupo_telegram }}" target="_blank" class="social-btn telegram-btn">
+            <img src="{% static 'plataforma/images/icon_telegram.png' %}" alt="Telegram">
+        </a>
+        {% else %}
+        <a href="#" target="_blank" class="social-btn telegram-btn"> {# Fallback link #}
+            <img src="{% static 'plataforma/images/icon_telegram.png' %}" alt="Telegram">
+        </a>
+        {% endif %}
+    </div>
+
+    <script>
+        const carouselImages = [
+            "{% static 'plataforma/images/carousel_1.jpg' %}",
+            "{% static 'plataforma/images/carousel_2.jpg' %}",
+            "{% static 'plataforma/images/carousel_3.jpg' %}",
+            "{% static 'plataforma/images/carousel_4.jpg' %}"
+        ];
+        
+        const carousel = document.getElementById('image-carousel');
+        let currentImageIndex = 0;
+
+        function updateCarouselImage() {
+            carousel.style.backgroundImage = `url(${carouselImages[currentImageIndex]})`;
+            currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
+        }
+
+        setInterval(updateCarouselImage, 5000);
+        updateCarouselImage();
+
+        // ----------------------------------------------------
+        // CÓDIGO JAVASCRIPT PARA ALUGAR NÍVEIS
+        // ----------------------------------------------------
+        document.addEventListener('DOMContentLoaded', function() {
+            const botoesAlugar = document.querySelectorAll('.buy-btn');
+
+            botoesAlugar.forEach(botao => {
+                botao.addEventListener('click', function() {
+                    const nivelId = this.dataset.nivelId;
+                    
+                    fetch('/alugar-nivel/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken')
+                        },
+                        body: JSON.stringify({ nivel_id: nivelId })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            // Se a resposta não for OK, tente ler como texto para ver o erro.
+                            return response.text().then(text => {
+                                throw new Error(`Status: ${response.status}, Erro: ${text}`);
+                            });
+                        }
+                    })
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert(data.message);
+                            window.location.reload(); 
+                        } else {
+                            alert('Ocorreu um erro: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Ocorreu um erro ao processar o aluguel. Verifique o console para mais detalhes.');
+                    });
+                });
+            });
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.startsWith(name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+        // ----------------------------------------------------
+        // FIM DO CÓDIGO DE ALUGUEL
+        // ----------------------------------------------------
+    </script>
+</body>
+</html>

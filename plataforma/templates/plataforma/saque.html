@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saque - softbank</title>
+    <style>
+        body {
+            background-color: #0c0b2d;
+            background-image: url('{% static "plataforma/images/fundo_azul_raios.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            color: #ffeb3b;
+            text-shadow: 0 0 5px #ffeb3b;
+            font-size: 1.5em;
+            position: relative;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .info-box p {
+            margin: 5px 0;
+        }
+
+        .info-box strong {
+            color: #ffeb3b;
+        }
+
+        .withdraw-container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .withdraw-container h2 {
+            margin-bottom: 20px;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px #ffeb3b;
+        }
+
+        .current-balance {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background-image: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff416c;
+        }
+
+        .history-container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-bottom: 100px; /* Espaço para o rodapé */
+        }
+        
+        .history-container h2 {
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-details {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .history-status {
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .status-pending { color: #ffeb3b; }
+        .status-approved { color: #00ff00; }
+        .status-rejected { color: #ff416c; }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 0.8em;
+            transition: color 0.3s;
+        }
+
+        .footer-item img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 0 5px #fff);
+        }
+
+        .footer-item:hover {
+            color: #ffeb3b;
+        }
+
+        .messages {
+            list-style: none;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .messages .error {
+            background-color: #ff416c;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .messages .success {
+            background-color: #00ff00;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Saque</h1>
+    </div>
+
+    <div class="withdraw-container">
+        <div class="info-box">
+            <p><strong>Saque Mínimo:</strong> {{ SAQUE_MINIMO }} KZ</p>
+            <p><strong>Horário de Saque:</strong> {{ mensagem_horario }}</p> {# Usando a mensagem formatada da view #}
+            <p><strong>Taxa de Saque:</strong> {{ TAXA_SAQUE }}%</p>
+        </div>
+        
+        <h2>Solicitar Saque</h2>
+        <p class="current-balance">Saldo Disponível: {{ usuario.saldo_disponivel|floatformat:2 }} KZ</p> {# Usando saldo_disponivel #}
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {% if not tem_detalhes_bancarios %}
+            <p class="messages error">Por favor, preencha suas coordenadas bancárias no seu perfil antes de solicitar um saque.</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'saque' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="amount">Valor do Saque (KZ)</label>
+                <input type="number" id="amount" name="amount" min="{{ SAQUE_MINIMO }}" step="0.01" required>
+            </div>
+            
+            <button type="submit" class="submit-btn" {% if not tem_detalhes_bancarios %}disabled{% endif %}>Solicitar Saque</button>
+        </form>
+    </div>
+
+    <div class="history-container">
+        <h2>Histórico de Saques</h2>
+        <ul class="history-list">
+            {% for saque in historico_saques %}
+                <li class="history-item">
+                    <div class="history-details">
+                        <p><strong>Valor:</strong> {{ saque.valor|floatformat:2 }} KZ</p>
+                        <p><strong>Data:</strong> {{ saque.data_saque|date:"d/m/Y H:i" }}</p> {# Corrigido para data_saque #}
+                    </div>
+                    <span class="history-status 
+                        {% if saque.status == 'Aprovado' %}status-approved{% elif saque.status == 'Pendente' %}status-pending{% else %}status-rejected{% endif %}" {# Corrigido para status #}
+                    >
+                        {{ saque.status }} {# Exibe o status real #}
+                    </span>
+                </li>
+            {% empty %}
+                <p>Nenhuma solicitação de saque encontrada.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <nav class="footer-nav">
+        <a href="{% url 'menu' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
+            <span>MENU</span>
+        </a>
+        <a href="{% url 'nivel' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
+            <span>NÍVEL</span>
+        </a>
+        <a href="{% url 'renda' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
+            <span>RENDA</span>
+        </a>
+        <a href="{% url 'sobre' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
+            <span>SOBRE</span>
+        </a>
+        <a href="{% url 'perfil' %}" class="footer-item">
+            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
+            <span>PERFIL</span>
+        </a>
+    </nav>
+</body>
+</html>
