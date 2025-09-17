@@ -5,86 +5,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Paleta de Cores e Estilos Consistentes */
         body {
-            font-family: Arial, sans-serif;
+            /* Fundo Elegante e Brilhante */
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #e5e7eb;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             align-items: center;
+            justify-content: flex-start;
             min-height: 100vh;
-            background-image: url("{% static 'plataforma/images/fundo_azul_raios.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #fff;
+            text-align: center;
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
         }
+
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
-            position: relative;
-            text-align: center;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism Suave */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
         }
+
+        .header h1 {
+            color: #4f46e5;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px);
+        }
+
+        .back-button {
+            color: #f97316;
+            font-size: 1.4em;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
+        }
+
+        /* Contêiner de edição com novo estilo */
         .edit-profile-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             width: 90%;
             max-width: 500px;
-            margin-top: 20px;
-            margin-bottom: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
             text-align: left;
         }
+
         .edit-profile-container h2 {
-            color: #ffd700;
+            width: 100%;
+            color: #e5e7eb;
+            font-weight: 700;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 25px;
             text-align: center;
         }
+
+        /* Estilos dos campos de formulário */
         .form-group {
             margin-bottom: 18px;
         }
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: #fff;
+            font-weight: 600;
+            color: #e5e7eb;
         }
-        /* Estilos aplicados aos campos de input renderizados pelo Django Forms */
-        .form-group input, 
-        .form-group textarea {
+        .form-group input {
             width: calc(100% - 20px);
             padding: 12px;
-            border: 1px solid #555;
+            border: none;
             border-radius: 8px;
             background-color: rgba(255, 255, 255, 0.1);
             color: #fff;
             font-size: 1em;
             box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
         }
+        .form-group input:focus {
+            border: 1px solid #4f46e5;
+            box-shadow: 0 0 8px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Botão de envio (Salvar) com novo estilo */
         .submit-btn {
             width: 100%;
             padding: 15px;
             border: none;
-            border-radius: 25px;
-            background-image: linear-gradient(to right, #4CAF50, #2E8B57);
+            border-radius: 50px;
+            background-image: linear-gradient(to right, #10b981, #34d399);
             color: #fff;
             font-size: 1.1em;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
-            margin-top: 10px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
         }
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.6);
         }
+
+        /* Mensagens e Erros */
         .messages {
             list-style: none;
             padding: 0;
@@ -92,64 +151,42 @@
             text-align: center;
         }
         .messages li.success {
-            background-color: #4CAF50;
+            background-color: #10b981;
             color: white;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 5px;
+            font-weight: 600;
         }
         .messages li.error {
-            background-color: #f44336;
+            background-color: #ef4444; /* Vermelho mais moderno */
             color: white;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 5px;
+            font-weight: 600;
         }
         .errorlist {
-            color: #f44336;
+            color: #f97316; /* Laranja para erros */
             list-style: none;
             padding: 0;
             margin-top: 5px;
             font-size: 0.9em;
         }
-        .errorlist li {
-            margin-bottom: 3px;
-        }
-        /* Estilos do rodapé */
+
+        /* Remover a navegação do rodapé */
         .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-        .footer-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            font-size: 0.8em;
-            transition: color 0.3s;
-        }
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px #fff);
-        }
-        .footer-item:hover {
-            color: #ffeb3b;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'perfil' %}" class="back-button" title="Voltar ao Perfil">
+            <i class="fas fa-arrow-left"></i>
+        </a>
         <h1>Editar Perfil</h1>
+        <div style="width: 20px;"></div>
     </div>
 
     <div class="edit-profile-container">
@@ -230,27 +267,5 @@
         </form>
     </div>
 
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 </body>
 </html>
