@@ -2,11 +2,96 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Depósito - softbank</title>
-    <link rel="stylesheet" href="{% static 'plataforma/css/deposito.css' %}">
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depósito - softbank</title>
+    
+    <link rel="stylesheet" href="{% static 'plataforma/css/deposito.css' %}">
+
+    <style>
+        /* Estilos Padrão para Fundo e Botão Sair/Voltar */
+        :root {
+            --cor-fundo: #0d1a26;
+            --cor-primaria: #fde047; /* Amarelo Vibrante */
+            --cor-secundaria: #38bdf8; /* Azul Claro */
+            --cor-texto: #e2e8f0;
+            --cor-card-bg: rgba(255, 255, 255, 0.08);
+            --sombra-card: 0 4px 30px rgba(0, 0, 0, 0.2);
+            --sombra-brilho-primario: 0 0 15px rgba(253, 224, 71, 0.8);
+            --sombra-brilho-secundario: 0 0 15px rgba(56, 189, 248, 0.8);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cor-fundo);
+            background-image: linear-gradient(135deg, #0d1a26 0%, #1e3a5f 100%);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background-attachment: fixed;
+        }
+
+        /* Estilo do botão Sair/Voltar */
+        .logout-btn-bottom {
+            background-image: linear-gradient(45deg, #ef4444, #dc2626);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            text-transform: uppercase;
+        }
+
+        .logout-btn-bottom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.6);
+        }
+
+        /* Outros estilos do seu código original (apenas para garantir que não haja conflitos) */
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .header h1 {
+            margin: 0;
+            color: var(--cor-primaria);
+            font-size: 1.8rem;
+            text-shadow: var(--sombra-brilho-primario);
+        }
+
+        .main-container {
+            width: 90%;
+            max-width: 500px;
+            margin-top: 100px;
+            padding: 20px;
+            background: var(--cor-card-bg);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--cor-card-bg);
+            box-shadow: var(--sombra-card);
+        }
+        
+        /* ... outros estilos ... */
+    </style>
+</head>
 <body>
     <div class="header">
         <h1 class="blinking-title">Depósito</h1>
@@ -71,6 +156,11 @@
                 </div>
             {% endif %}
         </div>
+    </div>
+    
+    {# NOVO BOTÃO DE SAIR ABAIXO DO CONTEÚDO PRINCIPAL #}
+    <div style="margin-top: 30px;">
+        <a href="{% url 'saida' %}" class="logout-btn-bottom">Sair</a>
     </div>
 
     <script>
