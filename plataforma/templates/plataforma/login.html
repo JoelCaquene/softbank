@@ -5,87 +5,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Variáveis de Cores e Estilos */
+        :root {
+            --cor-fundo: #0d1a26;
+            --cor-primaria: #fde047; /* Amarelo Vibrante para Destaque */
+            --cor-secundaria: #38bdf8; /* Azul Claro para Detalhes */
+            --cor-texto: #e2e8f0;
+            --cor-card-bg: rgba(255, 255, 255, 0.08); /* Fundo semi-transparente */
+            --borda-card: rgba(255, 255, 255, 0.15);
+            --sombra-card: 0 4px 30px rgba(0, 0, 0, 0.2);
+            --cor-botao-entrar: #ff4500;
+        }
+
+        /* Animação do Brilho (Mundial) */
+        @keyframes glowing {
+            0% { text-shadow: 0 0 5px var(--cor-primaria), 0 0 10px var(--cor-primaria); }
+            50% { text-shadow: 0 0 15px var(--cor-primaria), 0 0 25px var(--cor-primaria); }
+            100% { text-shadow: 0 0 5px var(--cor-primaria), 0 0 10px var(--cor-primaria); }
+        }
+
+        /* Fundo e Layout */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cor-fundo);
+            /* Fundo gradiente similar ao das páginas internas */
+            background-image: linear-gradient(135deg, #0d1a26 0%, #1e3a5f 100%);
+            color: var(--cor-texto);
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url("{% static 'plataforma/images/background_login.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-        }
-        .container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
             text-align: center;
+        }
+
+        /* Contêiner Principal de Login - Glassmorphism */
+        .container {
+            /* Uso das variáveis de glassmorphism das outras páginas */
+            background: var(--cor-card-bg); 
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--borda-card);
+            box-shadow: var(--sombra-card);
+            padding: 30px;
             width: 90%;
             max-width: 400px;
         }
+
+        /* Título Principal (Nome da Plataforma) */
+        h1.platform-title {
+            margin-bottom: 30px;
+            color: var(--cor-primaria);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: glowing 2s infinite; /* Aplica o brilho */
+        }
+
+        /* Subtítulo Login */
         h2 {
-            margin-bottom: 20px;
-            font-size: 2em;
-            color: #ffd700;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            color: var(--cor-texto);
+            font-weight: 600;
         }
+
+        /* Estilo dos Campos de Input */
         input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            margin-bottom: 18px;
+            border: 1px solid var(--borda-card);
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+            color: var(--cor-texto);
+            font-size: 1em;
+            transition: border-color 0.3s;
         }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--cor-secundaria); /* Brilho ao focar */
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Estilo do Botão Entrar */
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
-            background-color: #ff4500;
+            border-radius: 8px;
+            background-image: linear-gradient(45deg, #ff8c00, var(--cor-botao-entrar)); /* Gradiente de Laranja/Vermelho */
             color: #fff;
-            font-size: 1em;
+            font-size: 1.1em;
+            font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
         }
+
         button:hover {
-            background-color: #e63900;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6);
         }
+
+        /* Link de Navegação (Cadastro) */
         .nav-link {
             display: block;
-            margin-top: 15px;
-            color: #ffd700;
+            margin-top: 20px;
+            color: var(--cor-primaria);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            transition: color 0.3s;
         }
+        
+        .nav-link:hover {
+            color: var(--cor-secundaria);
+            text-shadow: 0 0 5px var(--cor-primaria);
+        }
+
+        /* Mensagens (Erros/Sucesso) */
         .messages {
             list-style: none;
             padding: 0;
-            margin: 0 0 15px 0;
+            margin: 0 0 20px 0;
+        }
+        .messages li {
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-align: left;
         }
         .messages li.success {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 5px;
+            background-color: #4ade80; /* Verde mais moderno */
+            color: #0d1a26;
         }
         .messages li.error {
-            background-color: #f44336;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 5px;
+            background-color: #f87171; /* Vermelho mais moderno */
+            color: #0d1a26;
         }
     </style>
 </head>
 <body>
+    {# NOME DA PLATAFORMA NO CABEÇALHO #}
+    <h1 class="platform-title">SOFTBANK</h1>
+
     <div class="container">
-        <h2>Login softbank</h2>
+        <h2>Entrar na Conta</h2>
+        
+        {# MENSAGENS DO DJANGO #}
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -93,12 +172,16 @@
                 {% endfor %}
             </ul>
         {% endif %}
+        
+        {# FORMULÁRIO DE LOGIN #}
         <form method="post">
             {% csrf_token %}
             <input type="tel" name="phone_number" placeholder="Número de Telefone" required>
             <input type="password" name="password" placeholder="Senha" required>
             <button type="submit">Entrar</button>
         </form>
+        
+        {# LINK PARA CADASTRO #}
         <a href="{% url 'cadastro' %}" class="nav-link">Não tem uma conta? Cadastre-se</a>
     </div>
 </body>
