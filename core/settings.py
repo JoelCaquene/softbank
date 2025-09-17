@@ -31,7 +31,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-q+)rh&425aq#(5#2l+7
 
 # DEBUG deve ser FALSO em produção.
 # Verificamos a variável 'RENDER' para determinar o ambiente.
-DEBUG = 'RENDER' not in os.environ 
+# ATENÇÃO: DEBUG=True TEMPORARIAMENTE para ver o traceback do Erro 500.
+DEBUG = True 
 
 # Domínios permitidos para acessar sua aplicação
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com'] 
@@ -81,7 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media', # Adicionado para mídia local
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -140,15 +141,14 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles' # Onde collectstatic vai coletar todos os arquivos estáticos
 
 # Configuração de Arquivos de Mídia (Uploads de Usuário)
-# Necessário para que o armazenamento de arquivos funcione sem Cloudinary
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Configuração de Armazenamento para Produção (Django 5.x)
-if not DEBUG:
+if not DEBUG: # Esta seção agora será ignorada, pois DEBUG é True
     STORAGES = {
-        # Armazenamento 'default' (Mídia/Uploads de usuário) usa o sistema de arquivos local (temporário/NÃO RECOMENDADO para produção)
+        # Armazenamento 'default' (Mídia/Uploads de usuário) usa o sistema de arquivos local
         "default": {
             "BACKEND": "django.core.files.storage.FileSystemStorage",
         },
@@ -157,8 +157,6 @@ if not DEBUG:
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
-
-# CLOUDINARY_URL removido.
 
 
 # Default primary key field type
@@ -171,5 +169,4 @@ AUTH_USER_MODEL = 'plataforma.Usuario'
 LOGIN_URL = 'login'
 
 # Para segurança CSRF em produção
-# CLOUDINARY REMOVIDO
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
