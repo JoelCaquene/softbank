@@ -30,7 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-q+)rh&425aq#(5#2l+7_(dpu&jwj6i&q2kfe_*!v!(o4t+#m3u')
 
 # DEBUG deve ser FALSO em produção.
-DEBUG = False 
+# Verificamos a variável 'RENDER' para determinar o ambiente.
+# REVERTIDO PARA MODO DE PRODUÇÃO SEGURO
+DEBUG = 'RENDER' not in os.environ 
 
 # Domínios permitidos para acessar sua aplicação
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com'] 
@@ -38,7 +40,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 # Variável do Render que contém o host externo
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    # Garantindo que o hostname do Render está sempre na lista de hosts permitidos
+    if RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Aplicações adicionadas
 INSTALLED_APPS = [
@@ -144,7 +148,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Configuração de Armazenamento para Produção (Django 5.x)
-if not DEBUG: # Esta seção agora será ignorada, pois DEBUG é True
+if not DEBUG:
     STORAGES = {
         # Armazenamento 'default' (Mídia/Uploads de usuário) usa o sistema de arquivos local
         "default": {
