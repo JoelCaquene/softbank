@@ -5,15 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saque - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Paleta de Cores Suaves e Modernas:
+         * Fundo: #0e122b (Azul Escuro Suave)
+         * Destaque/Primária: #4f46e5 (Índigo Vibrante/Roxo Suave)
+         * Secundária/Alerta: #f97316 (Laranja Suave)
+         * Sucesso: #10b981 (Verde Esmeralda Suave)
+         * Texto: #e5e7eb (Cinza Claro Suave)
+         */
         body {
-            background-color: #0c0b2d;
-            background-image: url('{% static "plataforma/images/fundo_azul_raios.jpg" %}');
+            /* Fundo Lindo e Suave */
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e5e7eb; /* Cor de letra suave */
+            font-family: 'Poppins', sans-serif; /* Letras lindas e elegantes */
             margin: 0;
             padding: 0;
             display: flex;
@@ -24,118 +34,185 @@
             text-align: center;
         }
 
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
-            position: relative;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism Suave */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; /* Fixo no topo */
+            top: 0;
+            z-index: 1000;
         }
 
+        .header h1 {
+            color: #4f46e5; /* Destaque Primário */
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1; /* Centraliza o título */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px); /* Ajuste para centralizar, compensando o botão */
+        }
+
+        .back-button {
+            /* Botão Voltar elegante */
+            color: #f97316; /* Cor chamativa para o botão */
+            font-size: 1.4em;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
+        }
+        
+        /* Ajuste do padding do body para o cabeçalho fixo */
+        body {
+            padding-top: 60px; /* Altura do header + margem */
+        }
+        /* Fim do Novo Cabeçalho */
+
+
         .info-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            /* Glassmorphism Suave */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
             border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
             text-align: left;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             font-size: 0.9em;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .info-box p {
             margin: 5px 0;
+            font-weight: 300;
         }
 
         .info-box strong {
-            color: #ffeb3b;
+            color: #4f46e5; /* Destaque Primário */
+            font-weight: 600;
         }
 
         .withdraw-container {
             width: 90%;
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            /* Glassmorphism Mais Pronunciado */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .withdraw-container h2 {
-            margin-bottom: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 10px #ffeb3b;
+            margin-bottom: 25px;
+            color: #e5e7eb;
+            font-weight: 700;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* O título principal dentro do container fica para Solicitar Saque */
         }
 
         .current-balance {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #00ff00;
-            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #10b981; /* Verde Sucesso */
+            margin-bottom: 30px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.1);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #e5e7eb;
+            font-size: 1em;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #555;
-            background-color: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #4f46e5; /* Borda da cor de destaque */
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo suave */
+            color: #e5e7eb;
+            border-radius: 10px;
             font-size: 1em;
             box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #f97316; /* Foco chamativo */
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+            outline: none;
         }
 
         .submit-btn {
-            background-image: linear-gradient(to right, #ff416c, #ff4b2b);
+            /* Cor Chamativa e Suave (Índigo/Roxo Vibrante) */
+            background-image: linear-gradient(to right, #4f46e5, #8b5cf6);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.2em;
-            font-weight: bold;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             text-transform: uppercase;
-            margin-top: 10px;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
         }
 
         .submit-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #ff416c;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.6);
         }
 
         .history-container {
             width: 90%;
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            /* Glassmorphism Suave */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            margin-bottom: 100px; /* Espaço para o rodapé */
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-bottom: 30px;
         }
         
         .history-container h2 {
-            margin-bottom: 20px;
-            color: #ffeb3b;
+            margin-bottom: 25px;
+            color: #e5e7eb;
+            font-weight: 700;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .history-list {
@@ -148,98 +225,123 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05); /* Fundo para cada item */
+            border-left: 5px solid; /* Borda de status ilustrativa */
+            transition: background 0.3s;
         }
 
-        .history-item:last-child {
-            border-bottom: none;
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .history-details {
             text-align: left;
             flex-grow: 1;
+            margin-right: 15px;
         }
 
-        .history-status {
-            font-weight: bold;
-            font-size: 0.9em;
+        .history-details p {
+            margin: 3px 0;
+            font-size: 0.95em;
         }
 
-        .status-pending { color: #ffeb3b; }
-        .status-approved { color: #00ff00; }
-        .status-rejected { color: #ff416c; }
-
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+        .history-details strong {
+            font-weight: 600;
         }
 
-        .footer-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: white;
+        .history-status-icon {
+            font-size: 1.5em;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        /* Statuses mais claros e ilustrativos */
+        .status-content {
+             display: flex;
+             flex-direction: column;
+             align-items: flex-end;
+             font-weight: 600;
+             text-align: right;
+        }
+
+        .status-pending { 
+            color: #f97316; /* Laranja Suave - Chamativo */
+            border-color: #f97316; 
+        }
+        .status-approved { 
+            color: #10b981; /* Verde Esmeralda Suave */
+            border-color: #10b981; 
+        }
+        .status-rejected { 
+            color: #ef4444; /* Vermelho Suave */
+            border-color: #ef4444; 
+        }
+
+        .status-tag {
             font-size: 0.8em;
-            transition: color 0.3s;
+            padding: 4px 8px;
+            border-radius: 5px;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+        
+        .status-pending .status-tag { background-color: rgba(249, 115, 22, 0.2); }
+        .status-approved .status-tag { background-color: rgba(16, 185, 129, 0.2); }
+        .status-rejected .status-tag { background-color: rgba(239, 68, 68, 0.2); }
 
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px #fff);
-        }
-
-        .footer-item:hover {
-            color: #ffeb3b;
-        }
-
+        /* Mensagens */
         .messages {
             list-style: none;
-            padding: 10px;
+            padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
             text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .messages li {
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.95em;
         }
         
         .messages .error {
-            background-color: #ff416c;
+            background-color: #ef4444; /* Vermelho Suave */
             color: white;
-            padding: 10px;
-            border-radius: 5px;
         }
 
         .messages .success {
-            background-color: #00ff00;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #10b981; /* Verde Esmeralda Suave */
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'menu' %}" class="back-button" title="Voltar ao Menu">
+            <i class="fas fa-arrow-left"></i> </a>
         <h1>Saque</h1>
+        <div style="width: 20px;"></div> 
     </div>
 
     <div class="withdraw-container">
+        <h2>Solicitar Saque</h2>
+        
         <div class="info-box">
+            <p>ℹ️ **Regras de Saque**</p>
             <p><strong>Saque Mínimo:</strong> {{ SAQUE_MINIMO }} KZ</p>
-            <p><strong>Horário de Saque:</strong> {{ mensagem_horario }}</p> {# Usando a mensagem formatada da view #}
+            <p><strong>Horário de Saque:</strong> {{ mensagem_horario }}</p>
             <p><strong>Taxa de Saque:</strong> {{ TAXA_SAQUE }}%</p>
         </div>
         
-        <h2>Solicitar Saque</h2>
-        <p class="current-balance">Saldo Disponível: {{ usuario.saldo_disponivel|floatformat:2 }} KZ</p> {# Usando saldo_disponivel #}
+        <p class="current-balance">💰 Saldo Disponível: **{{ usuario.saldo_disponivel|floatformat:2 }} KZ**</p>
         
         {% if messages %}
             <ul class="messages">
@@ -250,7 +352,7 @@
         {% endif %}
         
         {% if not tem_detalhes_bancarios %}
-            <p class="messages error">Por favor, preencha suas coordenadas bancárias no seu perfil antes de solicitar um saque.</p>
+            <p class="messages error">⚠️ Por favor, preencha suas coordenadas bancárias no seu perfil antes de solicitar um saque.</p>
         {% endif %}
 
         <form method="post" action="{% url 'saque' %}">
@@ -260,7 +362,9 @@
                 <input type="number" id="amount" name="amount" min="{{ SAQUE_MINIMO }}" step="0.01" required>
             </div>
             
-            <button type="submit" class="submit-btn" {% if not tem_detalhes_bancarios %}disabled{% endif %}>Solicitar Saque</button>
+            <button type="submit" class="submit-btn" {% if not tem_detalhes_bancarios %}disabled{% endif %}>
+                Processar Saque
+            </button>
         </form>
     </div>
 
@@ -268,44 +372,34 @@
         <h2>Histórico de Saques</h2>
         <ul class="history-list">
             {% for saque in historico_saques %}
-                <li class="history-item">
+                <li class="history-item 
+                    {% if saque.status == 'Aprovado' %}status-approved{% elif saque.status == 'Pendente' %}status-pending{% else %}status-rejected{% endif %}">
+                    
                     <div class="history-details">
-                        <p><strong>Valor:</strong> {{ saque.valor|floatformat:2 }} KZ</p>
-                        <p><strong>Data:</strong> {{ saque.data_saque|date:"d/m/Y H:i" }}</p> {# Corrigido para data_saque #}
+                        <p><strong>Valor Solicitado:</strong> {{ saque.valor|floatformat:2 }} KZ</p>
+                        <p><strong>Data da Solicitação:</strong> {{ saque.data_saque|date:"d/m/Y H:i" }}</p>
+                        {% if saque.taxa %}
+                            <p><strong>Taxa Aplicada:</strong> {{ saque.taxa|floatformat:2 }} KZ</p>
+                        {% endif %}
                     </div>
-                    <span class="history-status 
-                        {% if saque.status == 'Aprovado' %}status-approved{% elif saque.status == 'Pendente' %}status-pending{% else %}status-rejected{% endif %}" {# Corrigido para status #}
-                    >
-                        {{ saque.status }} {# Exibe o status real #}
-                    </span>
+                    
+                    <div class="status-content">
+                        {% if saque.status == 'Aprovado' %}
+                            <span class="history-status-icon">✅</span>
+                        {% elif saque.status == 'Pendente' %}
+                            <span class="history-status-icon">⏳</span>
+                        {% else %}
+                            <span class="history-status-icon">❌</span>
+                        {% endif %}
+                        <span class="status-tag">
+                            {{ saque.status|upper }}
+                        </span>
+                    </div>
                 </li>
             {% empty %}
-                <p>Nenhuma solicitação de saque encontrada.</p>
+                <p style="color: #9ca3af;">Nenhuma solicitação de saque encontrada.</p>
             {% endfor %}
         </ul>
     </div>
-
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 </body>
 </html>
