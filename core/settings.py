@@ -39,7 +39,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 # Variável do Render que contém o host externo
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME) # Linha 42 CORRIGIDA com indentação padrão
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Aplicações adicionadas
 INSTALLED_APPS = [
@@ -53,9 +53,7 @@ INSTALLED_APPS = [
     # Suas aplicações
     'plataforma', 
 
-    # Apps de terceiros para deploy
-    'cloudinary_storage', # Para gerenciar arquivos de mídia no Cloudinary
-    'cloudinary',         # Integração com Cloudinary
+    # Apps de terceiros para deploy (CLOUDINARY REMOVIDO)
 ]
 
 MIDDLEWARE = [
@@ -83,7 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media', # Adicionado para mídia local
             ],
         },
     },
@@ -141,21 +139,26 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles' # Onde collectstatic vai coletar todos os arquivos estáticos
 
-# Configuração do Cloudinary
-CLOUDINARY_URL = os.getenv('CLOUDINARY_URL') 
+# Configuração de Arquivos de Mídia (Uploads de Usuário)
+# Necessário para que o armazenamento de arquivos funcione sem Cloudinary
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Configuração de Armazenamento para Produção (Django 5.x)
 if not DEBUG:
     STORAGES = {
-        # Armazenamento 'default' (Mídia/Uploads de usuário) usa Cloudinary
+        # Armazenamento 'default' (Mídia/Uploads de usuário) usa o sistema de arquivos local (temporário/NÃO RECOMENDADO para produção)
         "default": {
-            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
         },
         # Armazenamento 'staticfiles' (CSS/JS) usa WhiteNoise
         "staticfiles": {
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
+
+# CLOUDINARY_URL removido.
 
 
 # Default primary key field type
@@ -168,4 +171,5 @@ AUTH_USER_MODEL = 'plataforma.Usuario'
 LOGIN_URL = 'login'
 
 # Para segurança CSRF em produção
-CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'https://*.cloud.cloudinary.com']
+# CLOUDINARY REMOVIDO
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
