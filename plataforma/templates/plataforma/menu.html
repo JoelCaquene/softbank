@@ -75,7 +75,7 @@
         .main-container {
             width: 95%;
             max-width: 960px;
-            padding: 20px 0; /* Ajuste para não ter padding horizontal desnecessário */
+            padding: 20px 0;
             margin-top: 80px; /* Espaço para o cabeçalho fixo */
         }
 
@@ -85,7 +85,7 @@
             grid-template-columns: repeat(2, 1fr); /* Padrão: 2 colunas para mobile */
             gap: 15px;
             width: 100%;
-            /* Design do Glassmorphism removido para os botões e aplicado ao contêiner */
+            /* Design do Glassmorphism aplicado ao contêiner */
             background: var(--cor-card-bg); 
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -96,10 +96,9 @@
 
         /* Estilo do Botão (Grid Item) - SEM O QUADRADO */
         .grid-item {
-            /* Removido background, border e padding internos */
             background: none; 
             border: none;
-            padding: 10px; /* Padding menor, focado na área de clique */
+            padding: 10px;
             
             display: flex;
             flex-direction: column;
@@ -117,16 +116,14 @@
 
         /* Efeito de Brilho no Hover */
         .grid-item:hover {
-            transform: scale(1.05); /* Um pequeno aumento no tamanho */
-            /* Adiciona um pequeno brilho ao redor do item, sem ser uma sombra forte */
+            transform: scale(1.05);
             text-shadow: 0 0 5px var(--cor-secundaria); 
         }
 
         .grid-item img {
             width: 60px; /* Ícones um pouco maiores */
             height: 60px;
-            margin-bottom: 5px; /* Espaço menor entre ícone e texto */
-            /* Brilho suave no ícone */
+            margin-bottom: 5px;
             filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8)); 
             transition: filter 0.3s ease;
         }
@@ -140,7 +137,6 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
 
         /* Estilo para o botão "Sair" na parte inferior */
         .logout-container {
@@ -170,7 +166,7 @@
         /* Rodapé de Navegação (FIXO) */
         .footer-nav {
             width: 100%;
-            position: fixed; /* GARANTE QUE FIQUE FIXO */
+            position: fixed; 
             bottom: 0;
             left: 0;
             background: rgba(0, 0, 0, 0.8);
@@ -196,7 +192,7 @@
         }
 
         .footer-item.active {
-            color: var(--cor-primaria); /* Cor primária para o item ativo */
+            color: var(--cor-primaria);
             font-weight: 700;
             text-shadow: 0 0 5px var(--cor-primaria);
         }
@@ -394,7 +390,8 @@
             <span>NÍVEL</span>
         </a>
         <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png'}" alt="Sobre">
+            {# CORREÇÃO: Removida a aspa simples extra após o .png que estava causando o erro 400 no console. #}
+            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
             <span>SOBRE</span>
         </a>
         <a href="{% url 'perfil' %}" class="footer-item">
