@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Depósito - softbank</title>
     <link rel="stylesheet" href="{% static 'plataforma/css/deposito.css' %}">
-    <link rel="stylesheet" href="{% static 'plataforma/css/menu.css' %}">
-</head>
+    </head>
 <body>
     <div class="header">
-        <h1>Depósito</h1>
-        <a href="{% url 'saida' %}" class="logout-btn">Sair</a>
+        <h1 class="blinking-title">Depósito</h1>
+        <a href="{% url 'menu' %}" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Voltar
+        </a>
     </div>
 
     <div class="main-container">
@@ -67,29 +72,6 @@
             {% endif %}
         </div>
     </div>
-
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 
     <script>
         function copiarIBAN() {
