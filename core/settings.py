@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-q+)rh&425aq#(5#2l+7
 # DEBUG deve ser FALSO em produção.
 # Verificamos a variável 'RENDER' para determinar o ambiente.
 # ATENÇÃO: DEBUG=True TEMPORARIAMENTE para ver o traceback do Erro 500.
-DEBUG = False 
+DEBUG = True 
 
 # Domínios permitidos para acessar sua aplicação
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com'] 
