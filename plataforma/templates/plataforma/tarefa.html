@@ -5,183 +5,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Máquina - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Paleta de Cores Suaves e Modernas:
+         * Fundo: #0e122b (Azul Escuro Suave)
+         * Destaque/Primária: #4f46e5 (Índigo Vibrante/Roxo Suave)
+         * Secundária/Alerta: #f97316 (Laranja Suave)
+         * Sucesso: #10b981 (Verde Esmeralda Suave)
+         * Texto: #e5e7eb (Cinza Claro Suave)
+         */
         body {
-            background-color: #0c0b2d;
-            background-image: url('{% static "plataforma/images/fundo_azul_raios.jpg" %}'); /* Use o caminho da sua imagem */
+            /* Fundo Lindo e Suave */
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e5e7eb; /* Cor de letra suave */
+            font-family: 'Poppins', sans-serif; /* Letras lindas e elegantes */
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Altera para alinhar ao topo */
+            justify-content: flex-start;
             min-height: 100vh;
             text-align: center;
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
         }
 
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism Suave */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; /* Fixo no topo */
+            top: 0;
+            z-index: 1000;
         }
 
-        .machine-container {
+        .header h1 {
+            color: #4f46e5; /* Destaque Primário */
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1; /* Centraliza o título */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px); /* Ajuste para centralizar, compensando o botão */
+        }
+
+        .back-button {
+            /* Botão Voltar elegante */
+            color: #f97316; /* Cor chamativa para o botão */
+            font-size: 1.4em;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
+        }
+
+        /* Container do relógio de produção */
+        .clock-container {
             width: 90%;
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            margin-top: 40px; /* Aumenta a margem superior para subir a máquina */
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 50px;
         }
 
-        .machine-header h2 {
-            margin: 0 0 10px;
+        .clock-container h2 {
+            font-weight: 700;
             font-size: 1.8em;
-            color: #ffeb3b;
-            text-shadow: 0 0 10px #ffeb3b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .clock-display {
+            background-color: #0a0c1a;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0 0 15px rgba(79, 70, 229, 0.4);
+            margin-bottom: 20px;
         }
         
-        .panel-display {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid #77ff77;
-            box-shadow: 0 0 10px #77ff77, inset 0 0 5px #77ff77;
-            padding: 15px;
-            border-radius: 10px;
-            width: 90%;
-            margin: 20px auto;
+        .clock-title {
+            color: #4f46e5;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        .panel-display p {
-            margin: 8px 0;
+        .timer {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #10b981;
+            text-shadow: 0 0 15px #10b981;
+            margin: 10px 0;
+        }
+        
+        .status-display {
             font-size: 1.1em;
+            font-weight: 600;
+            color: #f97316;
+            margin-top: 15px;
         }
 
-        #timer {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
-        }
-
-        #production-btn {
-            background-image: linear-gradient(to right, #ff416c, #ff4b2b);
+        .production-btn {
+            background-image: linear-gradient(to right, #4f46e5, #8b5cf6);
             color: white;
             border: none;
             padding: 15px 30px;
-            border-radius: 30px;
+            border-radius: 50px;
             font-size: 1.2em;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
         }
 
-        #production-btn:disabled {
+        .production-btn:disabled {
             background: #555;
+            background-image: none;
             cursor: not-allowed;
             box-shadow: none;
             filter: grayscale(100%);
         }
 
-        #production-btn:hover:enabled {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #ff416c;
+        .production-btn:hover:enabled {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.6);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-weight: 500;
         }
         
-        .message {
-            margin-top: 15px;
-            font-size: 1em;
-            color: #ffeb3b;
-            font-weight: bold;
-            text-shadow: 0 0 5px #ffeb3b;
-        }
-
+        /* Remover a navegação do rodapé */
         .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-
-        .footer-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            font-size: 0.8em;
-            transition: color 0.3s;
-        }
-
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px #fff);
-        }
-
-        .footer-item:hover {
-            color: #ffeb3b;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'menu' %}" class="back-button" title="Voltar ao Menu">
+            <i class="fas fa-arrow-left"></i> </a>
         <h1>Tarefa</h1>
+        <div style="width: 20px;"></div>
     </div>
 
-    <div class="machine-container">
-        <div class="machine-header">
-            <h2>Máquina de Produção</h2>
+    <div class="clock-container">
+        <h2>Máquina de Produção</h2>
+        <div class="clock-display">
+            <p class="clock-title">Status: <span id="status">---</span></p>
+            <i class="fas fa-clock fa-2x" style="color: #4f46e5;"></i>
+            <p class="clock-title">Próxima Produção em:</p>
+            <p id="timer" class="timer">--:--:--</p>
         </div>
-        <div class="machine-body">
-            <div class="panel-display">
-                <p>Status: <span id="status">Pronta para produzir</span></p>
-                <p>Próxima Produção em:</p>
-                <p id="timer">--:--:--</p>
-            </div>
-            <button id="production-btn">Produção</button>
-            <div class="message" id="info-message"></div>
-        </div>
+        <button id="production-btn" class="production-btn">Produção</button>
+        <div class="message" id="info-message"></div>
     </div>
-
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
 
     <script>
         const productionBtn = document.getElementById('production-btn');
@@ -193,7 +196,6 @@
         let lastProductionTime = localStorage.getItem('lastProductionTime') || 0;
         
         // Esta variável deve ser passada do backend (Django)
-        // Certifique-se de que sua view passe 'has_level' para o template
         let hasLevel = {{ has_level|yesno:"true,false" }}; 
 
         function updateUI() {
@@ -201,7 +203,7 @@
                 productionBtn.disabled = true;
                 infoMessage.textContent = "Você precisa alugar um nível para usar a máquina.";
                 statusDisplay.textContent = "Inativa";
-                timerDisplay.textContent = "--:--:--";
+                timerDisplay.textContent = "00:00:00";
                 return;
             }
             
