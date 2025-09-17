@@ -5,15 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Níveis - softbank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Paleta de Cores Suaves e Modernas:
+         * Fundo: #0e122b (Azul Escuro Suave)
+         * Destaque/Primária: #4f46e5 (Índigo Vibrante/Roxo Suave)
+         * Secundária/Alerta: #f97316 (Laranja Suave)
+         * Sucesso: #10b981 (Verde Esmeralda Suave)
+         * Texto: #e5e7eb (Cinza Claro Suave)
+         */
         body {
-            background-color: #0c0b2d;
-            background-image: url('{% static "plataforma/images/fundo_azul_raios.jpg" %}');
+            /* Fundo Lindo e Suave */
+            background-color: #0e122b;
+            background-image: linear-gradient(135deg, #0e122b 0%, #1c274c 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e5e7eb; /* Cor de letra suave */
+            font-family: 'Poppins', sans-serif; /* Letras lindas e elegantes */
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,71 +32,89 @@
             justify-content: flex-start;
             min-height: 100vh;
             text-align: center;
-            padding-bottom: 80px; /* Espaço para o footer fixo */
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
         }
 
+        /* Novo Cabeçalho com Botão Voltar */
         .header {
             width: 100%;
-            padding: 20px;
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            font-size: 1.5em;
-            position: relative;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism Suave */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-sizing: border-box;
+            position: fixed; /* Fixo no topo */
+            top: 0;
+            z-index: 1000;
         }
 
-        .logout-btn {
-            background-color: #ff416c;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+        .header h1 {
+            color: #4f46e5; /* Destaque Primário */
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            flex-grow: 1; /* Centraliza o título */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateX(-20px); /* Ajuste para centralizar, compensando o botão */
+        }
+
+        .back-button {
+            /* Botão Voltar elegante */
+            color: #f97316; /* Cor chamativa para o botão */
+            font-size: 1.4em;
             text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4);
+            padding: 5px;
+            transition: color 0.3s, transform 0.2s;
         }
 
-        .logout-btn:hover {
-            background-color: #e63900;
-            transform: translateY(-2px);
+        .back-button:hover {
+            color: #ffaa5b;
+            transform: scale(1.1);
         }
 
+        /* Container principal */
         .levels-display-container {
             width: 90%;
             max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px; /* Espaçamento entre os cartões de nível */
+            gap: 25px; /* Espaçamento entre os cartões */
         }
 
         .levels-display-container h2 {
-            color: #ffeb3b;
-            text-shadow: 0 0 5px #ffeb3b;
-            margin-bottom: 15px;
+            width: 100%;
+            color: #e5e7eb;
+            font-weight: 700;
             font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
+        /* Itens de Nível com gradientes e brilhos */
         .level-card-item {
-            background-image: linear-gradient(160deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             width: 90%;
             max-width: 400px;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-image: linear-gradient(135deg, #1f4037, #99f2c8); /* Gradiente suave */
+            color: #0e122b;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 20px #99f2c8; /* Sombra e brilho */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -94,138 +122,85 @@
 
         .level-card-item:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6), 0 0 30px #99f2c8;
         }
 
-        .level-card-item-image, .level-card-item-image-placeholder {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 5px solid #ffd700;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 12px rgba(255, 215, 0, 0.4);
+        /* Variação de cores para os níveis (exemplo) */
+        .level-card-item:nth-child(3) {
+            background-image: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 20px #8b5cf6;
+        }
+        .level-card-item:nth-child(3):hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6), 0 0 30px #8b5cf6;
+        }
+
+        .level-card-item:nth-child(4) {
+            background-image: linear-gradient(135deg, #f97316, #fb923c);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 20px #fb923c;
+        }
+        .level-card-item:nth-child(4):hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6), 0 0 30px #fb923c;
         }
 
         .level-card-item h3 {
             margin-top: 0;
             font-size: 1.8em;
-            color: #ffd700;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
         }
 
         .level-card-item p {
             margin: 8px 0;
             font-size: 1.2em;
+            color: #f3f4f6;
         }
 
         .level-card-item .buy-btn {
-            background-color: #28a745;
+            background-color: #10b981; /* Verde esmeralda para o botão */
             color: white;
             padding: 12px 25px;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1.1em;
             font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
             margin-top: 15px;
+            text-transform: uppercase;
+        }
+        
+        .level-card-item .buy-btn:hover {
+            background-color: #0c9e74;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.6);
         }
 
-        .level-card-item .buy-btn:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
+        .level-card-item .buy-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            filter: grayscale(100%);
         }
 
         .no-levels-message {
-            color: #ffeb3b;
+            color: #e5e7eb;
             font-size: 1.1em;
             margin-top: 20px;
-            text-shadow: 0 0 3px rgba(255, 235, 59, 0.5);
         }
-
-        /* Footer de navegação */
+        
+        /* Remover o rodapé de navegação */
         .footer-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-        }
-
-        .footer-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            font-size: 0.85em;
-            transition: color 0.3s, transform 0.2s;
-            flex: 1;
-        }
-
-        .footer-item img {
-            width: 35px;
-            height: 35px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 7px #fff);
-        }
-
-        .footer-item:hover {
-            color: #ffeb3b;
-            transform: translateY(-3px);
-        }
-
-        /* Responsividade */
-        @media (max-width: 600px) {
-            .levels-display-container {
-                padding: 15px;
-                gap: 15px;
-            }
-
-            .level-card-item {
-                padding: 15px;
-            }
-
-            .level-card-item-image, .level-card-item-image-placeholder {
-                width: 90px;
-                height: 90px;
-            }
-
-            .level-card-item h3 {
-                font-size: 1.5em;
-            }
-
-            .level-card-item p {
-                font-size: 1.1em;
-            }
-
-            .level-card-item .buy-btn {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            .header {
-                font-size: 1.4em;
-                padding: 15px;
-            }
-            .logout-btn {
-                padding: 6px 12px;
-                font-size: 0.9em;
-            }
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{% url 'menu' %}" class="back-button" title="Voltar ao Menu">
+            <i class="fas fa-arrow-left"></i> </a>
         <h1>Níveis</h1>
-        <a href="{% url 'saida' %}" class="logout-btn">Sair</a>
+        <div style="width: 20px;"></div>
     </div>
 
     <div class="levels-display-container">
@@ -233,15 +208,12 @@
         {% if niveis %}
             {% for nivel in niveis %}
                 <div class="level-card-item" data-id="{{ nivel.id }}">
-                    {% if nivel.imagem %}
-                        <img src="{{ nivel.imagem.url }}" alt="Imagem do Nível {{ nivel.nome_nivel }}" class="level-card-item-image">
-                    {% else %}
-                        <img src="https://placehold.co/100x100/CCCCCC/FFFFFF?text=Sem%20Imagem" alt="Nível sem imagem" class="level-card-item-image-placeholder">
-                    {% endif %}
+                    <i class="fas fa-gem fa-4x" style="color: #ffffff; margin-bottom: 15px;"></i>
+                    
                     <h3>{{ nivel.nome_nivel }}</h3>
-                    <p>Depósito Mínimo: KZ {{ nivel.deposito_minimo }}</p>
-                    <p>Ganho Diário: KZ {{ nivel.ganho_diario }}</p>
-                    <p>Ganho Mensal: KZ {{ nivel.ganho_mensal }}</p>
+                    <p>Depósito Mínimo: KZ {{ nivel.deposito_minimo|floatformat:2 }}</p>
+                    <p>Ganho Diário: KZ {{ nivel.ganho_diario|floatformat:2 }}</p>
+                    <p>Ganho Mensal: KZ {{ nivel.ganho_mensal|floatformat:2 }}</p>
                     <p>Ciclo: {{ nivel.ciclo_dias }} dias</p>
                     <button class="buy-btn" data-id="{{ nivel.id }}">Alugar</button>
                 </div>
@@ -251,29 +223,6 @@
         {% endif %}
     </div>
 
-    <nav class="footer-nav">
-        <a href="{% url 'menu' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
-            <span>MENU</span>
-        </a>
-        <a href="{% url 'nivel' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
-            <span>NÍVEL</span>
-        </a>
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
-        </a>
-        <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
-            <span>SOBRE</span>
-        </a>
-        <a href="{% url 'perfil' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_perfil.png' %}" alt="Perfil">
-            <span>PERFIL</span>
-        </a>
-    </nav>
-    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const buyButtons = document.querySelectorAll('.buy-btn');
@@ -282,7 +231,7 @@
                 button.addEventListener('click', function() {
                     const nivelId = this.getAttribute('data-id');
                     
-                    fetch('/alugar-nivel/', { // URL CORRIGIDA: usei o traço (-) em vez do sublinhado (_)
+                    fetch('/alugar-nivel/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
