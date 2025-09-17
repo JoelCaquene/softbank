@@ -5,28 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - softbank</title>
-    {# Seu link para o CSS externo #}
-    <link rel="stylesheet" href="{% static 'plataforma/css/menu.css' %}">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Importa a fonte Poppins */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
+        /* Variáveis de Cores e Estilos */
         :root {
-            --cor-fundo: #0c0e18;
-            --cor-primaria: #ff3366; /* Rosa vibrante */
-            --cor-secundaria: #33ccff; /* Azul celeste */
-            --cor-texto: #ffffff;
-            --cor-texto-claro: #dddddd;
-            --cor-card-bg: rgba(255, 255, 255, 0.08); /* Fundo semi-transparente para cards */
+            --cor-fundo: #0d1a26;
+            --cor-primaria: #fde047; /* Amarelo Vibrante */
+            --cor-secundaria: #38bdf8; /* Azul Claro */
+            --cor-texto: #e2e8f0;
+            --cor-card-bg: rgba(255, 255, 255, 0.08);
             --borda-card: rgba(255, 255, 255, 0.15);
             --sombra-card: 0 4px 30px rgba(0, 0, 0, 0.2);
-            --sombra-brilho: 0 0 10px rgba(255, 51, 102, 0.5); /* Brilho suave */
+            --sombra-brilho-primario: 0 0 15px rgba(253, 224, 71, 0.8);
+            --sombra-brilho-secundario: 0 0 15px rgba(56, 189, 248, 0.8);
         }
 
+        /* Animação do Brilho */
+        @keyframes glowing {
+            0% { text-shadow: 0 0 5px var(--cor-primaria), 0 0 10px var(--cor-primaria); }
+            50% { text-shadow: 0 0 15px var(--cor-primaria), 0 0 25px var(--cor-primaria); }
+            100% { text-shadow: 0 0 5px var(--cor-primaria), 0 0 10px var(--cor-primaria); }
+        }
+
+        /* Estilos de Fundo e Layout */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--cor-fundo);
+            background-image: linear-gradient(135deg, #0d1a26 0%, #1e3a5f 100%);
             color: var(--cor-texto);
             margin: 0;
             padding: 0;
@@ -35,83 +41,61 @@
             align-items: center;
             min-height: 100vh;
             text-align: center;
-            background-image: url('{% static 'plataforma/images/background_placeholder.jpg' %}'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            overflow-x: hidden;
             padding-bottom: 70px; /* Espaço para o rodapé fixo */
+            background-attachment: fixed;
         }
 
-        /* ---------------------- HEADER ---------------------- */
+        /* Novo Cabeçalho */
         .header {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(5px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             top: 0;
-            left: 0;
             z-index: 1000;
         }
 
         .header h1 {
             margin: 0;
             color: var(--cor-primaria);
-            font-size: 1.8rem;
-            text-shadow: var(--sombra-brilho);
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glowing 2s infinite; /* Animação de brilho para o cabeçalho */
         }
-
-        .logout-btn {
-            background: linear-gradient(90deg, #ff6b81, var(--cor-primaria));
-            color: var(--cor-texto);
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: var(--sombra-brilho);
-        }
-
-        .logout-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 51, 102, 0.9);
-        }
-
-        /* O CARROSSEL FOI REMOVIDO DAQUI */
         
-        /* ---------------------- GRID DE BOTÕES (O NOVO LOOK - SEM CORES FIXAS) ---------------------- */
-        .grid-wrapper {
-            width: 90%;
+        /* Contêiner Principal para os Botões */
+        .main-container {
+            width: 95%;
             max-width: 960px;
-            padding: 15px;
-            background: var(--cor-card-bg); 
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--borda-card);
-            box-shadow: var(--sombra-card);
-            margin-bottom: 30px;
-            /* NOVO AJUSTE: Move os botões para cima, abaixo do header fixo */
-            margin-top: 80px; 
+            padding: 20px;
+            margin-top: 80px; /* Espaço para o cabeçalho fixo */
         }
 
+        /* Grid de Botões */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 BOTÕES POR LINHA */
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas para mobile */
+            gap: 15px;
             width: 100%;
+            background: rgba(255, 255, 255, 0.08); 
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: var(--sombra-card);
+            padding: 20px;
         }
 
         .grid-item {
-            /* Apenas o ícone e texto funcionam como botão. O fundo é o do grid-wrapper */
-            background: none; 
-            border-radius: 10px;
-            padding: 10px 5px; 
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -120,130 +104,74 @@
             color: var(--cor-texto);
             font-weight: 600;
             transition: all 0.3s ease;
-            border: 1px solid transparent; /* Borda transparente para manter o espaço */
-            min-height: 70px;
-            font-size: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .grid-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(56, 189, 248, 0.1), rgba(253, 224, 71, 0.1));
+            transition: transform 0.5s ease;
+            transform: scale(0);
+            z-index: 0;
+        }
+
+        .grid-item:hover:before {
+            transform: scale(1);
         }
 
         .grid-item:hover {
-            transform: translateY(-2px) scale(1.03);
-            background: rgba(255, 255, 255, 0.05); /* Efeito suave no hover */
-            border-color: rgba(255, 255, 255, 0.1); 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px var(--cor-secundaria);
         }
 
         .grid-item img {
-            width: 40px; 
-            height: 40px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); 
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            position: relative;
+            z-index: 1;
         }
-        
-        /* Cores de destaque (Brilho) no hover (opcional, mas profissional) */
-        .grid-item:nth-child(1):hover { box-shadow: 0 0 10px #ff3366; } 
-        .grid-item:nth-child(2):hover { box-shadow: 0 0 10px #33ccff; } 
-        .grid-item:nth-child(3):hover { box-shadow: 0 0 10px #9933ff; } 
-        .grid-item:nth-child(4):hover { box-shadow: 0 0 10px #ff9933; } 
-        .grid-item:nth-child(5):hover { box-shadow: 0 0 10px #33ff99; } 
-        .grid-item:nth-child(6):hover { box-shadow: 0 0 10px #ffcc33; } 
-        .grid-item:nth-child(7):hover { box-shadow: 0 0 10px #ff33cc; } 
-        .grid-item:nth-child(8):hover { box-shadow: 0 0 10px #3366ff; } 
 
-        /* ---------------------- NÍVEIS DE ALUGUEL ---------------------- */
-        .levels-container {
-            width: 90%;
+        .grid-item span {
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Estilo para o botão "Sair" na parte inferior */
+        .logout-container {
+            width: 100%;
             max-width: 960px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            padding: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .levels-container h2 {
             text-align: center;
-            color: var(--cor-secundaria);
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px rgba(51, 204, 255, 0.5);
+            margin-top: 30px;
         }
 
-        .level-card {
-            background: var(--cor-card-bg);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid var(--borda-card);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        .logout-btn-bottom {
+            background-image: linear-gradient(45deg, #ef4444, #dc2626);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
             transition: all 0.3s ease;
-        }
-        
-        .level-card:hover {
-             transform: scale(1.02);
-             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-        }
-        
-        .level-card-image, .level-card-image-placeholder {
-            min-width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            background-color: var(--cor-primaria);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 700;
-            object-fit: cover;
-            border: 2px solid var(--cor-secundaria);
-        }
-        
-        .level-card div {
-            flex-grow: 1;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            text-transform: uppercase;
         }
 
-        .level-card h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.1rem;
-            color: var(--cor-primaria);
-        }
-        
-        .level-card p {
-            margin: 2px 0;
-            font-size: 0.85rem;
-            color: var(--cor-texto-claro);
-        }
-        
-        .level-card .buy-btn {
-            background: var(--cor-secundaria);
-            color: var(--cor-fundo);
-            padding: 8px 15px;
-            border: none;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s;
-            box-shadow: 0 0 5px rgba(51, 204, 255, 0.7);
-        }
-        
-        .level-card .buy-btn:hover {
-            background: #66e6ff;
-            transform: scale(1.05);
-        }
-        
-        .no-levels-message {
-            text-align: center;
-            color: var(--cor-texto-claro);
-            padding: 10px;
+        .logout-btn-bottom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.6);
         }
 
-
-        /* ---------------------- RODAPÉ DE NAVEGAÇÃO ---------------------- */
+        /* Rodapé de Navegação (mantido, mas estilizado) */
         .footer-nav {
             width: 100%;
             position: fixed;
@@ -263,14 +191,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: var(--cor-texto-claro);
+            color: var(--cor-texto);
             text-decoration: none;
             font-size: 0.7rem;
             font-weight: 500;
             transition: color 0.3s, transform 0.2s;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
-        
+
         .footer-item.active {
             color: var(--cor-secundaria);
             font-weight: 700;
@@ -278,18 +206,17 @@
         }
 
         .footer-item img {
-            width: 25px; 
+            width: 25px;
             height: 25px;
             margin-bottom: 3px;
-            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
         }
 
         .footer-item:hover {
             color: var(--cor-secundaria);
             transform: scale(1.05);
         }
-        
-        /* ---------------------- MODAL DE BOAS-VINDAS ---------------------- */
+
+        /* Estilos do Modal de Boas-Vindas */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -312,11 +239,11 @@
         }
 
         .welcome-modal {
-            background: var(--cor-card-bg);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             backdrop-filter: blur(15px);
             border: 2px solid var(--cor-primaria);
-            box-shadow: 0 0 30px rgba(255, 51, 102, 0.7);
+            box-shadow: 0 0 30px rgba(253, 224, 71, 0.7);
             padding: 30px;
             width: 90%;
             max-width: 400px;
@@ -336,7 +263,7 @@
         }
 
         .welcome-modal p {
-            color: var(--cor-texto-claro);
+            color: var(--cor-texto);
             margin-bottom: 25px;
             font-size: 1rem;
             line-height: 1.5;
@@ -368,7 +295,7 @@
         }
 
         .close-modal-btn {
-            background-color: var(--cor-primaria);
+            background-image: linear-gradient(45deg, #ef4444, #dc2626);
             color: white;
             padding: 10px 25px;
             border: none;
@@ -376,52 +303,24 @@
             cursor: pointer;
             font-weight: 700;
             margin-top: 20px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .close-modal-btn:hover {
-            background-color: #e6004c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
         }
 
-        /* ---------------------- RESPONSIVIDADE ---------------------- */
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.5rem; }
-            .logout-btn { padding: 5px 10px; font-size: 0.7rem; }
-            /* AJUSTE para mobile: A margem superior do grid-wrapper é reduzida */
-            .grid-wrapper { margin-top: 70px; padding: 10px; } 
-            .grid-container { gap: 5px; }
-            .grid-item { padding: 5px 3px; min-height: 60px; font-size: 0.65rem; }
-            .grid-item img { width: 35px; height: 35px; margin-bottom: 2px; } 
-            .footer-item { font-size: 0.6rem; }
-            .footer-item img { width: 22px; height: 22px; }
-            
-            .level-card {
-                padding: 10px;
-                gap: 10px;
-            }
-            .level-card h3 { font-size: 1rem; }
-            .level-card p { font-size: 0.75rem; }
-            .level-card .buy-btn { padding: 6px 12px; font-size: 0.8rem; }
-        }
-        
-        @media (min-width: 961px) {
-            body { 
-                max-width: 1000px;
-                margin: 0 auto;
-            }
-            
-            .footer-nav {
-                position: static; 
-                width: 100%;
-                max-width: 1000px;
-                margin: 20px auto 0 auto;
-                border-radius: 10px 10px 0 0;
+        /* Responsividade */
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    {# O MODAL DE BOAS-VINDAS #}
+    {# MODAL DE BOAS-VINDAS #}
     <div id="welcomeModal" class="modal-overlay">
         <div class="welcome-modal">
             <h2>SEJA BEM VINDO À SOFTBANK</h2>
@@ -430,7 +329,6 @@
                 Para mais informações e suporte, clique nos nossos canais:
             </p>
             <div class="modal-social-links">
-                {# Assumindo que você tem as variáveis config e os links #}
                 <a href="{% if config and config.link_grupo_whatsapp %}{{ config.link_grupo_whatsapp }}{% else %}#{% endif %}" target="_blank">
                     <img src="{% static 'plataforma/images/icon_whatsapp.png' %}" alt="WhatsApp">
                 </a>
@@ -443,16 +341,11 @@
     </div>
     
     {# ---------------------- CONTEÚDO PRINCIPAL ---------------------- #}
-
     <div class="header">
         <h1>softbank</h1>
-        <a href="{% url 'saida' %}" class="logout-btn">Sair</a>
     </div>
 
-    {# O CARROSSEL (DIV) FOI REMOVIDO DAQUI #}
-
-    {# 2) QUADRADO BONITO PARA OS BOTÕES (GRID WRAPPER) - NOVO LOOK CLEAN #}
-    <div class="grid-wrapper">
+    <div class="main-container">
         <div class="grid-container">
             <a href="{% url 'deposito' %}" class="grid-item">
                 <img src="{% static 'plataforma/images/icon_deposito.png' %}" alt="Depósito">
@@ -487,36 +380,14 @@
                 <span>Prêmios</span>
             </a>
         </div>
+        
+        {# NOVO BOTÃO DE SAIR ABAIXO DOS BOTÕES #}
+        <div class="logout-container">
+            <a href="{% url 'saida' %}" class="logout-btn-bottom">Sair</a>
+        </div>
     </div>
 
-    {# 3) NÍVEIS DE ALUGUEL ABAIXO DO GRID #}
-    <div class="levels-container">
-        <h2>Níveis em Aluguel</h2>
-        {% if niveis %}
-            {% for nivel in niveis %}
-                <div class="level-card">
-                    {# Imagem/Placeholder do Nível #}
-                    {% if nivel.imagem %}
-                        <img src="{{ nivel.imagem.url }}" alt="Imagem do Nível {{ nivel.nome_nivel }}" class="level-card-image">
-                    {% else %}
-                        <div class="level-card-image-placeholder">Nível {{ forloop.counter }}</div>
-                    {% endif %}
-                    
-                    <div>
-                        <h3>{{ nivel.nome_nivel }}</h3> 
-                        <p>Aluguel: KZ {{ nivel.deposito_minimo|floatformat:2 }}</p>
-                        <p>Ganho Diário: KZ {{ nivel.ganho_diario|floatformat:2 }}</p>
-                        <p>Ciclo: {{ nivel.ciclo_dias }} dias</p>
-                    </div>
-                    <button class="buy-btn" data-nivel-id="{{ nivel.id }}">Alugar</button>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p class="no-levels-message">Nenhum nível disponível no momento.</p>
-        {% endif %}
-    </div>
-
-    {# 1) RODAPÉ DE NAVEGAÇÃO COM 4 BOTÕES #}
+    {# RODAPÉ DE NAVEGAÇÃO #}
     <nav class="footer-nav">
         <a href="{% url 'menu' %}" class="footer-item active">
             <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
@@ -536,91 +407,25 @@
         </a>
     </nav>
     
-
     <script>
-        // ----------------------------------------------------
-        // LÓGICA DO CARROSSEL (REMOVIDA)
-        // ----------------------------------------------------
-        // O código JS para o carrossel foi removido, pois o elemento foi retirado do HTML.
-
-        // ----------------------------------------------------
-        // LÓGICA DO MODAL DE BOAS-VINDAS (Aparece UMA ÚNICA VEZ)
-        // ----------------------------------------------------
+        // LÓGICA DO MODAL DE BOAS-VINDAS
         const modal = document.getElementById('welcomeModal');
         
         document.addEventListener('DOMContentLoaded', function() {
-            // Verifica se o modal JÁ FOI MOSTRADO (durante a sessão de navegação)
             if (!sessionStorage.getItem('softbank_welcome_shown')) {
                 modal.classList.add('show');
             }
-            
-            activateBuyButtons();
         });
 
         function closeModal() {
             modal.classList.remove('show');
-            // Marca que o modal já foi mostrado NESTA SESSÃO
             sessionStorage.setItem('softbank_welcome_shown', 'true'); 
         }
 
-        // ----------------------------------------------------
-        // CÓDIGO JAVASCRIPT PARA ALUGAR NÍVEIS
-        // ----------------------------------------------------
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.startsWith(name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        function activateBuyButtons() {
-            const botoesAlugar = document.querySelectorAll('.buy-btn');
-
-            botoesAlugar.forEach(botao => {
-                botao.addEventListener('click', function() {
-                    const nivelId = this.dataset.nivelId;
-                    
-                    fetch('/alugar-nivel/', { // Mantenha a URL correta do seu backend
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': getCookie('csrftoken')
-                        },
-                        body: JSON.stringify({ nivel_id: nivelId })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        } else {
-                            // Tenta ler o erro como texto para debug
-                            return response.text().then(text => {
-                                throw new Error(`Status: ${response.status}, Erro: ${text}`);
-                            });
-                        }
-                    })
-                    .then(data => {
-                        if (data.status === 'success') {
-                            alert(data.message);
-                            window.location.reload(); 
-                        } else {
-                            alert('Ocorreu um erro: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Ocorreu um erro ao processar o aluguel. Verifique o console para mais detalhes.');
-                    });
-                });
-            });
-        }
+        // LÓGICA DE ALUGUEL DE NÍVEIS REMOVIDA
+        // O trecho de código para alugar níveis foi removido, pois o contêiner 'levels-container'
+        // e seus botões foram removidos do HTML conforme a sua solicitação.
+        
     </script>
 </body>
 </html>
