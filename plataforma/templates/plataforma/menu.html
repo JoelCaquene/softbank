@@ -52,11 +52,12 @@
             justify-content: center;
             align-items: center;
             padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.8); /* Fundo mais escuro para destaque */
             backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             top: 0;
+            left: 0;
             z-index: 1000;
         }
 
@@ -74,28 +75,32 @@
         .main-container {
             width: 95%;
             max-width: 960px;
-            padding: 20px;
+            padding: 20px 0; /* Ajuste para não ter padding horizontal desnecessário */
             margin-top: 80px; /* Espaço para o cabeçalho fixo */
         }
 
         /* Grid de Botões */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 colunas para mobile */
+            grid-template-columns: repeat(2, 1fr); /* Padrão: 2 colunas para mobile */
             gap: 15px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.08); 
+            /* Design do Glassmorphism removido para os botões e aplicado ao contêiner */
+            background: var(--cor-card-bg); 
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.15);
+            border: 2px solid var(--borda-card);
             box-shadow: var(--sombra-card);
             padding: 20px;
         }
 
+        /* Estilo do Botão (Grid Item) - SEM O QUADRADO */
         .grid-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
+            /* Removido background, border e padding internos */
+            background: none; 
+            border: none;
+            padding: 10px; /* Padding menor, focado na área de clique */
+            
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -103,48 +108,39 @@
             text-decoration: none;
             color: var(--cor-texto);
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
         }
 
-        .grid-item:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(56, 189, 248, 0.1), rgba(253, 224, 71, 0.1));
-            transition: transform 0.5s ease;
-            transform: scale(0);
-            z-index: 0;
-        }
-
-        .grid-item:hover:before {
-            transform: scale(1);
-        }
-
+        /* Efeito de Brilho no Hover */
         .grid-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px var(--cor-secundaria);
+            transform: scale(1.05); /* Um pequeno aumento no tamanho */
+            /* Adiciona um pequeno brilho ao redor do item, sem ser uma sombra forte */
+            text-shadow: 0 0 5px var(--cor-secundaria); 
         }
 
         .grid-item img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-            position: relative;
-            z-index: 1;
+            width: 60px; /* Ícones um pouco maiores */
+            height: 60px;
+            margin-bottom: 5px; /* Espaço menor entre ícone e texto */
+            /* Brilho suave no ícone */
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8)); 
+            transition: filter 0.3s ease;
+        }
+
+        .grid-item:hover img {
+            filter: drop-shadow(0 0 12px var(--cor-primaria)); /* Brilho primário ao passar o mouse */
         }
 
         .grid-item span {
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+
 
         /* Estilo para o botão "Sair" na parte inferior */
         .logout-container {
@@ -171,10 +167,10 @@
             box-shadow: 0 8px 20px rgba(239, 68, 68, 0.6);
         }
 
-        /* Rodapé de Navegação (mantido, mas estilizado) */
+        /* Rodapé de Navegação (FIXO) */
         .footer-nav {
             width: 100%;
-            position: fixed;
+            position: fixed; /* GARANTE QUE FIQUE FIXO */
             bottom: 0;
             left: 0;
             background: rgba(0, 0, 0, 0.8);
@@ -200,9 +196,9 @@
         }
 
         .footer-item.active {
-            color: var(--cor-secundaria);
+            color: var(--cor-primaria); /* Cor primária para o item ativo */
             font-weight: 700;
-            text-shadow: 0 0 5px var(--cor-secundaria);
+            text-shadow: 0 0 5px var(--cor-primaria);
         }
 
         .footer-item img {
@@ -212,11 +208,11 @@
         }
 
         .footer-item:hover {
-            color: var(--cor-secundaria);
+            color: var(--cor-primaria);
             transform: scale(1.05);
         }
 
-        /* Estilos do Modal de Boas-Vindas */
+        /* Estilos do Modal (Mantidos) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -311,10 +307,10 @@
             box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
         }
 
-        /* Responsividade */
-        @media (min-width: 768px) {
+        /* Responsividade: Mudar para 4 colunas em telas maiores que 550px */
+        @media (min-width: 550px) {
             .grid-container {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(4, 1fr); /* 4 colunas para a maioria dos tablets e desktops */
             }
         }
     </style>
@@ -381,7 +377,7 @@
             </a>
         </div>
         
-        {# NOVO BOTÃO DE SAIR ABAIXO DOS BOTÕES #}
+        {# BOTÃO DE SAIR ABAIXO DOS BOTÕES #}
         <div class="logout-container">
             <a href="{% url 'saida' %}" class="logout-btn-bottom">Sair</a>
         </div>
@@ -398,7 +394,7 @@
             <span>NÍVEL</span>
         </a>
         <a href="{% url 'sobre' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
+            <img src="{% static 'plataforma/images/icon_sobre.png'}" alt="Sobre">
             <span>SOBRE</span>
         </a>
         <a href="{% url 'perfil' %}" class="footer-item">
@@ -422,10 +418,6 @@
             sessionStorage.setItem('softbank_welcome_shown', 'true'); 
         }
 
-        // LÓGICA DE ALUGUEL DE NÍVEIS REMOVIDA
-        // O trecho de código para alugar níveis foi removido, pois o contêiner 'levels-container'
-        // e seus botões foram removidos do HTML conforme a sua solicitação.
-        
     </script>
 </body>
 </html>
