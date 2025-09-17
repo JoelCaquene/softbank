@@ -83,28 +83,7 @@
             box-shadow: 0 0 15px rgba(255, 51, 102, 0.9);
         }
 
-        /* ---------------------- CARROSSEL ---------------------- */
-        .carousel-container {
-            width: 90%;
-            max-width: 960px; 
-            height: 200px; /* Altura mantida/ajustada para melhor visualização */
-            margin-top: 80px;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--sombra-card);
-            background-color: #333;
-            position: relative;
-            border: 2px solid var(--borda-card);
-        }
-
-        #image-carousel {
-            width: 100%;
-            height: 100%;
-            background-size: cover; /* **Ajuste para abrir mais e preencher** */
-            background-position: center;
-            transition: background-image 1s ease-in-out;
-        }
+        /* O CARROSSEL FOI REMOVIDO DAQUI */
         
         /* ---------------------- GRID DE BOTÕES (O NOVO LOOK - SEM CORES FIXAS) ---------------------- */
         .grid-wrapper {
@@ -117,6 +96,8 @@
             border: 1px solid var(--borda-card);
             box-shadow: var(--sombra-card);
             margin-bottom: 30px;
+            /* NOVO AJUSTE: Move os botões para cima, abaixo do header fixo */
+            margin-top: 80px; 
         }
 
         .grid-container {
@@ -128,7 +109,7 @@
 
         .grid-item {
             /* Apenas o ícone e texto funcionam como botão. O fundo é o do grid-wrapper */
-            background: none; /* **REMOVIDO FUNDO PARA DEIXAR O ICONE/TEXTO MAIS PURO** */
+            background: none; 
             border-radius: 10px;
             padding: 10px 5px; 
             display: flex;
@@ -147,15 +128,14 @@
         .grid-item:hover {
             transform: translateY(-2px) scale(1.03);
             background: rgba(255, 255, 255, 0.05); /* Efeito suave no hover */
-            /* Removendo o box-shadow geral para deixar mais limpo */
             border-color: rgba(255, 255, 255, 0.1); 
         }
 
         .grid-item img {
-            width: 40px; /* Ícone maior e mais centralizado */
+            width: 40px; 
             height: 40px;
             margin-bottom: 5px;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); /* Brilho no ícone para destaque */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); 
         }
         
         /* Cores de destaque (Brilho) no hover (opcional, mas profissional) */
@@ -263,7 +243,7 @@
         }
 
 
-        /* ---------------------- RODAPÉ DE NAVEGAÇÃO (APENAS 4 ITENS) ---------------------- */
+        /* ---------------------- RODAPÉ DE NAVEGAÇÃO ---------------------- */
         .footer-nav {
             width: 100%;
             position: fixed;
@@ -288,10 +268,9 @@
             font-size: 0.7rem;
             font-weight: 500;
             transition: color 0.3s, transform 0.2s;
-            flex-grow: 1; /* Distribui o espaço igualmente */
+            flex-grow: 1; 
         }
         
-        /* Cor de destaque para o item atual (Menu) */
         .footer-item.active {
             color: var(--cor-secundaria);
             font-weight: 700;
@@ -408,11 +387,11 @@
         @media (max-width: 600px) {
             .header h1 { font-size: 1.5rem; }
             .logout-btn { padding: 5px 10px; font-size: 0.7rem; }
-            .carousel-container { height: 160px; margin-top: 70px; } /* Ajuste */
-            .grid-wrapper { padding: 10px; }
+            /* AJUSTE para mobile: A margem superior do grid-wrapper é reduzida */
+            .grid-wrapper { margin-top: 70px; padding: 10px; } 
             .grid-container { gap: 5px; }
             .grid-item { padding: 5px 3px; min-height: 60px; font-size: 0.65rem; }
-            .grid-item img { width: 35px; height: 35px; margin-bottom: 2px; } /* Ajuste */
+            .grid-item img { width: 35px; height: 35px; margin-bottom: 2px; } 
             .footer-item { font-size: 0.6rem; }
             .footer-item img { width: 22px; height: 22px; }
             
@@ -427,14 +406,12 @@
         
         @media (min-width: 961px) {
             body { 
-                /* Centraliza a plataforma na tela, ideal para desktop */
                 max-width: 1000px;
                 margin: 0 auto;
-                /* Remove a fixed-position do footer no desktop para evitar conflitos */
             }
             
             .footer-nav {
-                position: static; /* No desktop, o rodapé pode ficar estático no final */
+                position: static; 
                 width: 100%;
                 max-width: 1000px;
                 margin: 20px auto 0 auto;
@@ -472,10 +449,7 @@
         <a href="{% url 'saida' %}" class="logout-btn">Sair</a>
     </div>
 
-    {# 3) CARROSSEL DE IMAGENS #}
-    <div class="carousel-container">
-        <div id="image-carousel"></div>
-    </div>
+    {# O CARROSSEL (DIV) FOI REMOVIDO DAQUI #}
 
     {# 2) QUADRADO BONITO PARA OS BOTÕES (GRID WRAPPER) - NOVO LOOK CLEAN #}
     <div class="grid-wrapper">
@@ -515,7 +489,7 @@
         </div>
     </div>
 
-    {# 3) NÍVEIS DE ALUGUEL ABAIXO DO CARROSSEL #}
+    {# 3) NÍVEIS DE ALUGUEL ABAIXO DO GRID #}
     <div class="levels-container">
         <h2>Níveis em Aluguel</h2>
         {% if niveis %}
@@ -542,7 +516,7 @@
         {% endif %}
     </div>
 
-    {# 1) RODAPÉ DE NAVEGAÇÃO COM 4 BOTÕES (Menu, Nível, Sobre, Perfil) #}
+    {# 1) RODAPÉ DE NAVEGAÇÃO COM 4 BOTÕES #}
     <nav class="footer-nav">
         <a href="{% url 'menu' %}" class="footer-item active">
             <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
@@ -565,26 +539,9 @@
 
     <script>
         // ----------------------------------------------------
-        // LÓGICA DO CARROSSEL
+        // LÓGICA DO CARROSSEL (REMOVIDA)
         // ----------------------------------------------------
-        const carouselImages = [
-            "{% static 'plataforma/images/carousel_1.jpg' %}",
-            "{% static 'plataforma/images/carousel_2.jpg' %}",
-            "{% static 'plataforma/images/carousel_3.jpg' %}",
-            "{% static 'plataforma/images/carousel_4.jpg' %}"
-        ];
-        
-        const carousel = document.getElementById('image-carousel');
-        let currentImageIndex = 0;
-
-        function updateCarouselImage() {
-            carousel.style.backgroundImage = `url(${carouselImages[currentImageIndex]})`;
-            currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
-        }
-
-        // Troca a imagem a cada 5 segundos
-        setInterval(updateCarouselImage, 5000);
-        updateCarouselImage(); // Carrega a primeira imagem imediatamente
+        // O código JS para o carrossel foi removido, pois o elemento foi retirado do HTML.
 
         // ----------------------------------------------------
         // LÓGICA DO MODAL DE BOAS-VINDAS (Aparece UMA ÚNICA VEZ)
@@ -602,12 +559,12 @@
 
         function closeModal() {
             modal.classList.remove('show');
-            // Marca que o modal já foi mostrado NESTA SESSÃO (aparecerá novamente se fechar o navegador)
+            // Marca que o modal já foi mostrado NESTA SESSÃO
             sessionStorage.setItem('softbank_welcome_shown', 'true'); 
         }
 
         // ----------------------------------------------------
-        // CÓDIGO JAVASCRIPT PARA ALUGAR NÍVEIS (Seu código original mantido)
+        // CÓDIGO JAVASCRIPT PARA ALUGAR NÍVEIS
         // ----------------------------------------------------
         function getCookie(name) {
             let cookieValue = null;
