@@ -86,8 +86,8 @@
         /* ---------------------- CARROSSEL ---------------------- */
         .carousel-container {
             width: 90%;
-            max-width: 960px; /* Ampliado */
-            height: 200px; /* Aumentei a altura */
+            max-width: 960px; 
+            height: 200px; /* Altura mantida/ajustada para melhor visualização */
             margin-top: 80px;
             margin-bottom: 25px;
             border-radius: 15px;
@@ -101,17 +101,17 @@
         #image-carousel {
             width: 100%;
             height: 100%;
-            background-size: cover; /* Garante que a imagem preencha o container */
+            background-size: cover; /* **Ajuste para abrir mais e preencher** */
             background-position: center;
             transition: background-image 1s ease-in-out;
         }
         
-        /* ---------------------- GRID DE BOTÕES (O NOVO LOOK) ---------------------- */
+        /* ---------------------- GRID DE BOTÕES (O NOVO LOOK - SEM CORES FIXAS) ---------------------- */
         .grid-wrapper {
             width: 90%;
             max-width: 960px;
             padding: 15px;
-            background: var(--cor-card-bg); /* O quadrado bonito */
+            background: var(--cor-card-bg); 
             border-radius: 20px;
             backdrop-filter: blur(10px);
             border: 1px solid var(--borda-card);
@@ -127,8 +127,8 @@
         }
 
         .grid-item {
-            /* Removendo os fundos coloridos e usando apenas o efeito glass */
-            background: rgba(255, 255, 255, 0.05); /* Fundo mais sutil */
+            /* Apenas o ícone e texto funcionam como botão. O fundo é o do grid-wrapper */
+            background: none; /* **REMOVIDO FUNDO PARA DEIXAR O ICONE/TEXTO MAIS PURO** */
             border-radius: 10px;
             padding: 10px 5px; 
             display: flex;
@@ -139,40 +139,39 @@
             color: var(--cor-texto);
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent; /* Borda transparente para manter o espaço */
             min-height: 70px;
             font-size: 0.75rem;
         }
 
         .grid-item:hover {
             transform: translateY(-2px) scale(1.03);
-            background: rgba(255, 255, 255, 0.15); /* Mais visível no hover */
-            border-color: var(--cor-primaria);
-            box-shadow: 0 0 15px var(--cor-primaria);
+            background: rgba(255, 255, 255, 0.05); /* Efeito suave no hover */
+            /* Removendo o box-shadow geral para deixar mais limpo */
+            border-color: rgba(255, 255, 255, 0.1); 
         }
 
         .grid-item img {
-            width: 38px; /* Ícone maior */
-            height: 38px;
+            width: 40px; /* Ícone maior e mais centralizado */
+            height: 40px;
             margin-bottom: 5px;
-            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); /* Sombra suave no ícone */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); /* Brilho no ícone para destaque */
         }
         
-        /* Cores individuais para destaque no hover (opcional, mas moderno) */
-        .grid-item:nth-child(1):hover { border-color: #ff3366; box-shadow: 0 0 15px #ff3366; } 
-        .grid-item:nth-child(2):hover { border-color: #33ccff; box-shadow: 0 0 15px #33ccff; } 
-        .grid-item:nth-child(3):hover { border-color: #9933ff; box-shadow: 0 0 15px #9933ff; } 
-        .grid-item:nth-child(4):hover { border-color: #ff9933; box-shadow: 0 0 15px #ff9933; } 
-        .grid-item:nth-child(5):hover { border-color: #33ff99; box-shadow: 0 0 15px #33ff99; } 
-        .grid-item:nth-child(6):hover { border-color: #ffcc33; box-shadow: 0 0 15px #ffcc33; } 
-        .grid-item:nth-child(7):hover { border-color: #ff33cc; box-shadow: 0 0 15px #ff33cc; } 
-        .grid-item:nth-child(8):hover { border-color: #3366ff; box-shadow: 0 0 15px #3366ff; } 
+        /* Cores de destaque (Brilho) no hover (opcional, mas profissional) */
+        .grid-item:nth-child(1):hover { box-shadow: 0 0 10px #ff3366; } 
+        .grid-item:nth-child(2):hover { box-shadow: 0 0 10px #33ccff; } 
+        .grid-item:nth-child(3):hover { box-shadow: 0 0 10px #9933ff; } 
+        .grid-item:nth-child(4):hover { box-shadow: 0 0 10px #ff9933; } 
+        .grid-item:nth-child(5):hover { box-shadow: 0 0 10px #33ff99; } 
+        .grid-item:nth-child(6):hover { box-shadow: 0 0 10px #ffcc33; } 
+        .grid-item:nth-child(7):hover { box-shadow: 0 0 10px #ff33cc; } 
+        .grid-item:nth-child(8):hover { box-shadow: 0 0 10px #3366ff; } 
 
         /* ---------------------- NÍVEIS DE ALUGUEL ---------------------- */
         .levels-container {
             width: 90%;
-            max-width: 960px; /* Alinhado ao grid-wrapper */
+            max-width: 960px;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -182,6 +181,13 @@
             margin-top: 20px;
             margin-bottom: 20px;
             text-align: left;
+        }
+        
+        .levels-container h2 {
+            text-align: center;
+            color: var(--cor-secundaria);
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(51, 204, 255, 0.5);
         }
 
         .level-card {
@@ -201,8 +207,63 @@
              transform: scale(1.02);
              box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
+        
+        .level-card-image, .level-card-image-placeholder {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background-color: var(--cor-primaria);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            object-fit: cover;
+            border: 2px solid var(--cor-secundaria);
+        }
+        
+        .level-card div {
+            flex-grow: 1;
+        }
 
-        /* ---------------------- RODAPÉ DE NAVEGAÇÃO ---------------------- */
+        .level-card h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            color: var(--cor-primaria);
+        }
+        
+        .level-card p {
+            margin: 2px 0;
+            font-size: 0.85rem;
+            color: var(--cor-texto-claro);
+        }
+        
+        .level-card .buy-btn {
+            background: var(--cor-secundaria);
+            color: var(--cor-fundo);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+            box-shadow: 0 0 5px rgba(51, 204, 255, 0.7);
+        }
+        
+        .level-card .buy-btn:hover {
+            background: #66e6ff;
+            transform: scale(1.05);
+        }
+        
+        .no-levels-message {
+            text-align: center;
+            color: var(--cor-texto-claro);
+            padding: 10px;
+        }
+
+
+        /* ---------------------- RODAPÉ DE NAVEGAÇÃO (APENAS 4 ITENS) ---------------------- */
         .footer-nav {
             width: 100%;
             position: fixed;
@@ -347,14 +408,21 @@
         @media (max-width: 600px) {
             .header h1 { font-size: 1.5rem; }
             .logout-btn { padding: 5px 10px; font-size: 0.7rem; }
-            .carousel-container { height: 140px; margin-top: 70px; }
+            .carousel-container { height: 160px; margin-top: 70px; } /* Ajuste */
             .grid-wrapper { padding: 10px; }
             .grid-container { gap: 5px; }
             .grid-item { padding: 5px 3px; min-height: 60px; font-size: 0.65rem; }
-            .grid-item img { width: 30px; height: 30px; margin-bottom: 2px; }
+            .grid-item img { width: 35px; height: 35px; margin-bottom: 2px; } /* Ajuste */
             .footer-item { font-size: 0.6rem; }
             .footer-item img { width: 22px; height: 22px; }
-            .levels-container h2 { font-size: 1.3rem; }
+            
+            .level-card {
+                padding: 10px;
+                gap: 10px;
+            }
+            .level-card h3 { font-size: 1rem; }
+            .level-card p { font-size: 0.75rem; }
+            .level-card .buy-btn { padding: 6px 12px; font-size: 0.8rem; }
         }
         
         @media (min-width: 961px) {
@@ -362,6 +430,15 @@
                 /* Centraliza a plataforma na tela, ideal para desktop */
                 max-width: 1000px;
                 margin: 0 auto;
+                /* Remove a fixed-position do footer no desktop para evitar conflitos */
+            }
+            
+            .footer-nav {
+                position: static; /* No desktop, o rodapé pode ficar estático no final */
+                width: 100%;
+                max-width: 1000px;
+                margin: 20px auto 0 auto;
+                border-radius: 10px 10px 0 0;
             }
         }
     </style>
@@ -400,7 +477,7 @@
         <div id="image-carousel"></div>
     </div>
 
-    {# 2) QUADRADO BONITO PARA OS BOTÕES (GRID WRAPPER) #}
+    {# 2) QUADRADO BONITO PARA OS BOTÕES (GRID WRAPPER) - NOVO LOOK CLEAN #}
     <div class="grid-wrapper">
         <div class="grid-container">
             <a href="{% url 'deposito' %}" class="grid-item">
@@ -423,7 +500,6 @@
                 <img src="{% static 'plataforma/images/icon_equipa.png' %}" alt="Equipa">
                 <span>Equipa</span>
             </a>
-            {# Removido "Sobre" daqui para mover "Renda" para o footer. Deixei 8 botões para manter a organização 4x2. #}
             <a href="{% url 'renda' %}" class="grid-item"> 
                 <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
                 <span>Renda</span>
@@ -466,7 +542,7 @@
         {% endif %}
     </div>
 
-    {# 1) RODAPÉ DE NAVEGAÇÃO COM 5 BOTÕES (Menu, Nível, Renda, Sobre, Perfil) #}
+    {# 1) RODAPÉ DE NAVEGAÇÃO COM 4 BOTÕES (Menu, Nível, Sobre, Perfil) #}
     <nav class="footer-nav">
         <a href="{% url 'menu' %}" class="footer-item active">
             <img src="{% static 'plataforma/images/icon_menu.png' %}" alt="Menu">
@@ -475,11 +551,6 @@
         <a href="{% url 'nivel' %}" class="footer-item">
             <img src="{% static 'plataforma/images/icon_nivel.png' %}" alt="Nivel">
             <span>NÍVEL</span>
-        </a>
-        {# Renda agora está no rodapé #}
-        <a href="{% url 'renda' %}" class="footer-item">
-            <img src="{% static 'plataforma/images/icon_renda.png' %}" alt="Renda">
-            <span>RENDA</span>
         </a>
         <a href="{% url 'sobre' %}" class="footer-item">
             <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
@@ -491,7 +562,6 @@
         </a>
     </nav>
     
-    {# Removido botões flutuantes de WhatsApp/Telegram #}
 
     <script>
         // ----------------------------------------------------
@@ -517,25 +587,23 @@
         updateCarouselImage(); // Carrega a primeira imagem imediatamente
 
         // ----------------------------------------------------
-        // LÓGICA DO MODAL DE BOAS-VINDAS (Item 4)
+        // LÓGICA DO MODAL DE BOAS-VINDAS (Aparece UMA ÚNICA VEZ)
         // ----------------------------------------------------
         const modal = document.getElementById('welcomeModal');
         
-        // Use localStorage para garantir que o modal só apareça na primeira visita após o login
         document.addEventListener('DOMContentLoaded', function() {
-            // Verifica se é a primeira vez que o usuário vê o menu nesta sessão
-            if (!localStorage.getItem('softbank_welcome_shown')) {
+            // Verifica se o modal JÁ FOI MOSTRADO (durante a sessão de navegação)
+            if (!sessionStorage.getItem('softbank_welcome_shown')) {
                 modal.classList.add('show');
             }
             
-            // Reativa a lógica de Alugar Nível (mantida da sua versão)
             activateBuyButtons();
         });
 
         function closeModal() {
             modal.classList.remove('show');
-            // Marca que o modal já foi mostrado
-            localStorage.setItem('softbank_welcome_shown', 'true'); 
+            // Marca que o modal já foi mostrado NESTA SESSÃO (aparecerá novamente se fechar o navegador)
+            sessionStorage.setItem('softbank_welcome_shown', 'true'); 
         }
 
         // ----------------------------------------------------
@@ -575,6 +643,7 @@
                         if (response.ok) {
                             return response.json();
                         } else {
+                            // Tenta ler o erro como texto para debug
                             return response.text().then(text => {
                                 throw new Error(`Status: ${response.status}, Erro: ${text}`);
                             });
