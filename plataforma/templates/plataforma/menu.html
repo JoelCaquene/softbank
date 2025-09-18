@@ -10,30 +10,20 @@
     <style>
         /* Variáveis de Cores e Estilos */
         :root {
-            --cor-fundo: #0d1a26;
-            --cor-primaria: #fde047; /* Amarelo Vibrante */
-            --cor-secundaria: #38bdf8; /* Azul Claro */
-            --cor-texto: #e2e8f0;
-            --cor-card-bg: rgba(255, 255, 255, 0.08);
-            --borda-card: rgba(255, 255, 255, 0.15);
-            --sombra-card: 0 4px 30px rgba(0, 0, 0, 0.2);
-            --sombra-brilho-primario: 0 0 15px rgba(253, 224, 71, 0.8);
-            --sombra-brilho-secundario: 0 0 15px rgba(56, 189, 248, 0.8);
-        }
-
-        /* Animação do Brilho */
-        @keyframes glowing {
-            0% { text-shadow: 0 0 5px var(--cor-primaria), 0 0 10px var(--cor-primaria); }
-            50% { text-shadow: 0 0 15px var(--cor-primaria), 0 0 25px var(--cor-primaria); }
-            100% { text-shadow: 0 0 5px var(--cor-primaria), 0 0 10px var(--cor-primaria); }
+            --cor-fundo-pagina: #f0f2f5; /* Cinza muito claro, quase branco, para o fundo da página */
+            --cor-fundo-menu: #ffffff; /* Fundo do Menu (Grid) BRANCO */
+            --cor-primaria: #007bff; /* Azul primário (Pode ser ajustado) */
+            --cor-secundaria: #ffc107; /* Amarelo/Dourado para destaque */
+            --cor-texto-escuro: #333333; /* Texto escuro para o fundo branco */
+            --cor-texto-claro: #ffffff; /* Texto claro */
+            --sombra-card: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Estilos de Fundo e Layout */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--cor-fundo);
-            background-image: linear-gradient(135deg, #0d1a26 0%, #1e3a5f 100%);
-            color: var(--cor-texto);
+            background-color: var(--cor-fundo-pagina);
+            color: var(--cor-texto-escuro);
             margin: 0;
             padding: 0;
             display: flex;
@@ -42,100 +32,121 @@
             min-height: 100vh;
             text-align: center;
             padding-bottom: 70px; /* Espaço para o rodapé fixo */
-            background-attachment: fixed;
         }
 
-        /* Novo Cabeçalho */
+        /* Cabeçalho Fixo Simples (para o nome da plataforma) */
         .header {
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.8); /* Fundo mais escuro para destaque */
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            background: var(--cor-fundo-menu);
+            border-bottom: 1px solid #e0e0e0;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .header h1 {
             margin: 0;
             color: var(--cor-primaria);
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: glowing 2s infinite; /* Animação de brilho para o cabeçalho */
         }
         
+        /* Banner de Carrossel Fixo (Uma Imagem) */
+        .carousel-banner {
+            width: 100%;
+            max-width: 960px;
+            margin-top: 60px; /* Abaixo do cabeçalho fixo */
+            padding: 15px;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 150px; /* Altura fixa para o banner */
+            /* REMOVIDO: background: linear-gradient(135deg, var(--cor-primaria) 0%, #00b4d8 100%); */ 
+            border-radius: 15px;
+            box-shadow: var(--sombra-card);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Garante que a imagem fique dentro da borda */
+        }
+
+        /* NOVO: Estilo para a imagem dentro do banner */
+        .banner-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem cubra todo o espaço sem distorcer */
+            border-radius: 15px; /* Aplica o raio da borda na imagem */
+        }
+
+        /* O span com texto foi removido do HTML para dar espaço à imagem */
+
+
         /* Contêiner Principal para os Botões */
         .main-container {
             width: 95%;
             max-width: 960px;
             padding: 20px 0;
-            margin-top: 80px; /* Espaço para o cabeçalho fixo */
         }
 
-        /* Grid de Botões */
+        /* Grid de Botões - Principal Mudança */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Padrão: 2 colunas para mobile */
-            gap: 15px;
+            /* 4 colunas em telas pequenas e grandes */
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; /* Espaço menor para caber 4 */
             width: 100%;
-            /* Design do Glassmorphism aplicado ao contêiner */
-            background: var(--cor-card-bg); 
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--borda-card);
+            background: var(--cor-fundo-menu); 
+            border-radius: 15px;
             box-shadow: var(--sombra-card);
-            padding: 20px;
+            padding: 15px;
+            margin-top: 20px;
         }
 
-        /* Estilo do Botão (Grid Item) - SEM O QUADRADO */
+        /* Estilo do Botão (Grid Item) */
         .grid-item {
             background: none; 
             border: none;
-            padding: 10px;
-            
+            padding: 10px 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: var(--cor-texto);
+            color: var(--cor-texto-escuro); /* Cor de texto ESCURO para o fundo branco */
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            font-size: 0.75rem; /* Fonte menor para caber em 4 colunas */
+            transition: all 0.2s ease;
+            border-radius: 10px;
         }
 
-        /* Efeito de Brilho no Hover */
+        /* Efeito no Hover para o botão */
         .grid-item:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 5px var(--cor-secundaria); 
+            background-color: #f0f0f0; /* Fundo suave no hover */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         .grid-item img {
-            width: 60px; /* Ícones um pouco maiores */
-            height: 60px;
+            width: 40px; /* Ícones menores para caber em 4 colunas */
+            height: 40px;
             margin-bottom: 5px;
-            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8)); 
-            transition: filter 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.5)); 
+            transition: filter 0.2s ease;
         }
-
+        
         .grid-item:hover img {
-            filter: drop-shadow(0 0 12px var(--cor-primaria)); /* Brilho primário ao passar o mouse */
+            filter: drop-shadow(0 0 8px var(--cor-secundaria)); 
         }
 
         .grid-item span {
-            font-size: 0.85rem;
+            font-size: 0.7rem; /* Texto bem legível e conciso */
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         /* Estilo para o botão "Sair" na parte inferior */
@@ -147,35 +158,35 @@
         }
 
         .logout-btn-bottom {
-            background-image: linear-gradient(45deg, #ef4444, #dc2626);
-            color: #fff;
+            background-image: linear-gradient(45deg, #dc3545, #c82333); /* Vermelho mais sóbrio */
+            color: var(--cor-texto-claro);
             padding: 12px 25px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
             text-transform: uppercase;
         }
 
         .logout-btn-bottom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.6);
         }
 
-        /* Rodapé de Navegação (FIXO) */
+        /* Rodapé de Navegação (FIXO) - Mantido, mas ajustado o estilo para harmonizar */
         .footer-nav {
             width: 100%;
             position: fixed; 
             bottom: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            padding: 10px 0;
+            background: var(--cor-fundo-menu); /* Fundo branco/claro */
+            border-top: 1px solid #e0e0e0;
+            padding: 5px 0;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
         }
 
@@ -183,24 +194,30 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: var(--cor-texto);
+            color: #6c757d; /* Cor mais neutra para o texto padrão */
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 500;
             transition: color 0.3s, transform 0.2s;
             flex-grow: 1;
+            padding: 5px 0;
         }
 
         .footer-item.active {
             color: var(--cor-primaria);
             font-weight: 700;
-            text-shadow: 0 0 5px var(--cor-primaria);
+            text-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
         }
 
         .footer-item img {
-            width: 25px;
-            height: 25px;
+            width: 20px; /* Ícones menores no rodapé */
+            height: 20px;
             margin-bottom: 3px;
+            filter: grayscale(100%); /* Ícones no rodapé sem cor */
+        }
+        
+        .footer-item.active img {
+            filter: none; /* Ícone ativo com cor original */
         }
 
         .footer-item:hover {
@@ -208,14 +225,14 @@
             transform: scale(1.05);
         }
 
-        /* Estilos do Modal (Mantidos) */
+        /* Estilos do Modal (Quadro após o login) - Personalizado para ser mais bonito e adaptável */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -231,17 +248,17 @@
         }
 
         .welcome-modal {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 2px solid var(--cor-primaria);
-            box-shadow: 0 0 30px rgba(253, 224, 71, 0.7);
+            background: var(--cor-fundo-menu); /* Fundo branco do modal */
+            color: var(--cor-texto-escuro);
+            border-radius: 15px;
             padding: 30px;
             width: 90%;
             max-width: 400px;
             text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             transform: scale(0.8);
             transition: transform 0.3s ease;
+            border-top: 5px solid var(--cor-primaria); /* Detalhe de cor no topo */
         }
         
         .modal-overlay.show .welcome-modal {
@@ -249,16 +266,15 @@
         }
 
         .welcome-modal h2 {
-            color: var(--cor-secundaria);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            color: var(--cor-primaria);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
 
         .welcome-modal p {
-            color: var(--cor-texto);
-            margin-bottom: 25px;
-            font-size: 1rem;
-            line-height: 1.5;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
         .modal-social-links {
@@ -269,15 +285,17 @@
 
         .modal-social-links a {
             display: block;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background-color: white;
-            transition: transform 0.2s;
+            background-color: #f0f0f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
         }
 
         .modal-social-links a:hover {
             transform: scale(1.1);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         }
 
         .modal-social-links img {
@@ -287,38 +305,35 @@
         }
 
         .close-modal-btn {
-            background-image: linear-gradient(45deg, #ef4444, #dc2626);
-            color: white;
+            background-image: linear-gradient(45deg, var(--cor-primaria), #0056b3);
+            color: var(--cor-texto-claro);
             padding: 10px 25px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 700;
-            margin-top: 20px;
+            font-weight: 600;
+            margin-top: 25px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
         }
 
         .close-modal-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
         }
 
-        /* Responsividade: Mudar para 4 colunas em telas maiores que 550px */
-        @media (min-width: 550px) {
-            .grid-container {
-                grid-template-columns: repeat(4, 1fr); /* 4 colunas para a maioria dos tablets e desktops */
-            }
-        }
+        /* NOTA: A regra @media (min-width: 550px) para 4 colunas foi removida. O grid agora é fixo em 4 colunas para *todas* as resoluções, como solicitado. */
     </style>
 </head>
 <body>
     {# MODAL DE BOAS-VINDAS #}
     <div id="welcomeModal" class="modal-overlay">
         <div class="welcome-modal">
-            <h2>SEJA BEM VINDO À SOFTBANK</h2>
+            <h2>🎉 BEM-VINDO À SOFTBANK!</h2>
             <p>
-                Aqui o seu investimento cresce de forma segura. Invista sem desconfiança.
-                Para mais informações e suporte, clique nos nossos canais:
+                A sua plataforma de investimento. Estamos contentes por tê-lo connosco! Invista de forma segura e com confiança.
+                <br><br>
+                Para suporte e novidades, clique nos nossos canais:
             </p>
             <div class="modal-social-links">
                 <a href="{% if config and config.link_grupo_whatsapp %}{{ config.link_grupo_whatsapp }}{% else %}#{% endif %}" target="_blank">
@@ -328,16 +343,27 @@
                     <img src="{% static 'plataforma/images/icon_telegram.png' %}" alt="Telegram">
                 </a>
             </div>
-            <button class="close-modal-btn" onclick="closeModal()">Entendido</button>
+            <button class="close-modal-btn" onclick="closeModal()">Entendido e Continuar</button>
         </div>
     </div>
     
     {# ---------------------- CONTEÚDO PRINCIPAL ---------------------- #}
+
+    {# CABEÇALHO #}
     <div class="header">
-        <h1>softbank</h1>
+        <h1>SOFTBANK</h1>
     </div>
 
     <div class="main-container">
+
+        {# BANNER/CARROSSEL FIXO - ATUALIZADO PARA USAR A TAG IMG COM 'banner_principal.png' #}
+        <div class="carousel-banner">
+            <div class="banner-image">
+                <img src="{% static 'plataforma/images/banner_principal.png' %}" alt="Banner Principal da Softbank">
+            </div>
+        </div>
+        
+        {# GRID DE BOTÕES (4 POR LINHA) #}
         <div class="grid-container">
             <a href="{% url 'deposito' %}" class="grid-item">
                 <img src="{% static 'plataforma/images/icon_deposito.png' %}" alt="Depósito">
@@ -375,7 +401,7 @@
         
         {# BOTÃO DE SAIR ABAIXO DOS BOTÕES #}
         <div class="logout-container">
-            <a href="{% url 'saida' %}" class="logout-btn-bottom">Sair</a>
+            <a href="{% url 'saida' %}" class="logout-btn-bottom">SAIR DA CONTA</a>
         </div>
     </div>
 
@@ -390,7 +416,6 @@
             <span>NÍVEL</span>
         </a>
         <a href="{% url 'sobre' %}" class="footer-item">
-            {# CORREÇÃO: Removida a aspa simples extra após o .png que estava causando o erro 400 no console. #}
             <img src="{% static 'plataforma/images/icon_sobre.png' %}" alt="Sobre">
             <span>SOBRE</span>
         </a>
@@ -405,16 +430,25 @@
         const modal = document.getElementById('welcomeModal');
         
         document.addEventListener('DOMContentLoaded', function() {
+            // Verifica se o modal já foi exibido nesta sessão
             if (!sessionStorage.getItem('softbank_welcome_shown')) {
                 modal.classList.add('show');
             }
         });
 
         function closeModal() {
+            // Fecha o modal
             modal.classList.remove('show');
+            // Marca o modal como exibido na sessão
             sessionStorage.setItem('softbank_welcome_shown', 'true'); 
         }
 
+        // Se o usuário clicar fora do modal, ele também fecha.
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
